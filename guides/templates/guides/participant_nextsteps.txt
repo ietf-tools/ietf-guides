@@ -1,0 +1,14 @@
+Thanks again for volunteering to be an IETF guide.
+
+Please follow the link below to enter the information we need to
+connect you with those requesting guides.
+
+Keep this email (or this link) handy - you can use the link to
+return and edit your information at any time.
+
+If you lose the link, you can get it again by entering the same
+email address in the "Become a Guide" form at the IETF Guide
+website.
+
+Your link:
+<{{ url }}>

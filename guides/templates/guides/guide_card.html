@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-header">
+    <div>
+      <span>{{ guide.given_name }} {{ guide.surname }}</span>
+      {% if guide.match_set.exists %} 
+        <span class="badge badge-pill badge-primary">
+          {{ guide.match_set.count }}
+        </span>
+      {% endif %}
+      <span class="float-right">{{ guide.affiliation }}</span>
+    </div>
+    <div>
+      <span>{{ guide.email }}</span>
+      <span class="float-right">{{ guide.country }}</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="card-text">
+      <div>
+        <span>Languages: {% for l in guide.language.all %}{{ l }} {% endfor %}</span>
+        <span class="float-right">Years: {{ guide.pretty_ietf_years }}</span>
+      </div>
+      <div>
+        <span>Multiple: {{ guide.multiple_guided }}</span>
+        <span class="float-right">Intro: {{ guide.give_intro }}</span>
+      </div>
+      <div>Arrives: {{ guide.arrival_date }}</div>
+      <div>Other: {{ guide.additional_info }}</div>
+    </div>
+  </div>
+</div>

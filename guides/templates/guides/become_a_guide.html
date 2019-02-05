@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}Become a guide{% endblock %}
+{% block content %}
+  <p>Thanks for your interest in being an IETF Guide! Pleae provide the email address you would like to use. We will send you a link to a page where you can provide details, and maintain those details later.</p>
+  <p>If you are already registered as a guide, but don't remember the link that was sent to you previously, it's safe to just provide your email address here again to cause the link to be resent.</p>
+  <form method="POST">{% csrf_token %}
+    {% bootstrap_form form layout='inline' error_types='all' %}
+    {% buttons %}
+      <button type="submit" class="btn btn-primary">Send Email</button>
+    {% endbuttons %}
+  </form>
+{% endblock %}

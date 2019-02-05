@@ -1,0 +1,19 @@
+Thanks for participating in the IETF Guides Program!
+
+{{ match.participant.given_name }},
+
+Your guide for the next IETF will be {{ match.guide.given_name }} {{ match.guide.surname}}.
+
+Your guide can be reached at {{ match.guide.email }}
+
+{{ match.guide.given_name}},
+
+This participant's name is {{ match.participant.given_name }} {{ match.participant.surname }}.
+
+Their interests are:
+
+Topics: {{ match.participant.topics }}
+
+Areas: {{ match.participant.areas }}
+
+Groups: {{ match.participant.groups }}

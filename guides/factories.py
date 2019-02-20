@@ -7,7 +7,7 @@ from itertools import combinations
 
 from guides.models import Guide, Participant, Match, Language, \
     GEND_NOPREF, GEND_MALE, GEND_FEMALE, \
-    ATTEND_NONE, ATTEND_ONE, ATTEND_FEW, \
+    ATTEND_NONE, ATTEND_ONE, ATTEND_TWO, ATTEND_THREE, \
     YEARS_LESSTHANFIVE, YEARS_FIVETOTEN, YEARS_MORETHANTEN
 
 
@@ -22,7 +22,7 @@ class ParticipantFactory(factory.DjangoModelFactory):
     affiliation = factory.Faker('company')
     country = factory.Faker('country')
     language = factory.fuzzy.FuzzyChoice(Language.objects.all())
-    attend = factory.fuzzy.FuzzyChoice([ATTEND_NONE,ATTEND_ONE, ATTEND_FEW])
+    attend = factory.fuzzy.FuzzyChoice([ATTEND_NONE,ATTEND_ONE, ATTEND_TWO, ATTEND_THREE])
     topics = factory.Faker('bs')
     areas = factory.fuzzy.FuzzyChoice(["ART", "INT", "OPS", "RTG", "SEC", "TSG", "I don't know yet"])
     groups = factory.fuzzy.FuzzyChoice(['stir', 'saag', 'iotrg',])

@@ -4,9 +4,9 @@
 {% block content %}
 <h2>Enter Your IETF Participation Information</h2>
 
-<p>The IETF Guides program does its best to match you with a Guide that shares common interests and spoken languages.  Note, however, this is not always possible.  Please fill out the following form to help us match you with the best guide.</p>
+<p>The IETF Guides program does its best to match you with a Guide that shares common interests and spoken languages.  Note, though it is not always possible to perform perfect matches, all of our experienced Guides will be ablp introduce you to the processes and culture of the IETF.  Please fill out the following form to help us match you with the best guide.</p>
 
-  <h3 style="margin-bottom: 1em;">Participant E-Mail: {{email}}</h3>
+  <h3 style="margin-bottom: 1em;">Registered Participant E-Mail: {{email}}</h3>
   <form method="post">{% csrf_token %}
     {% bootstrap_form form %}
     {% buttons %}

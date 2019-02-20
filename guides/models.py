@@ -7,22 +7,35 @@ from django.contrib.auth.models import User
 
 ATTEND_NONE = 'None'
 ATTEND_ONE = 'One'
-ATTEND_FEW = 'Few'
+ATTEND_TWO = 'Two'
+ATTEND_THREE = 'Three'
 
 ATTEND_CHOICES = (
     (ATTEND_NONE,'This is my first IETF meeting'),
     (ATTEND_ONE, 'This is my second IETF meeting'),
-    (ATTEND_FEW, 'I have been to two, three, or four IETF meetings')
+    (ATTEND_TWO, 'This is my third IETF meeting'),
+    (ATTEND_THREE, 'This is my fourth IETF meeting')
 )
 
 GEND_NOPREF = 'NoPref'
 GEND_MALE = 'Male'
 GEND_FEMALE = 'Female'
+GEND_NONBINARY = 'Non-Binary'
 
 GEND_CHOICES = (
     (GEND_NOPREF, "I don't have a preference"),
     (GEND_MALE, "I would prefer to work with a male guide"),
     (GEND_FEMALE, "I would prefer to work with a female guide"),
+)
+
+GEND_TYPE_FEMALE = "Female"
+GEND_TYPE_MALE = "Male"
+GEND_TYPE_NONBINARY = "Non-Binary"
+
+GEND_TYPES = (
+    (GEND_TYPE_FEMALE, "Female"),
+    (GEND_TYPE_MALE, "Male"),
+    (GEND_TYPE_NONBINARY, "Non Binary"),
 )
 
 YEARS_LESSTHANFIVE = "LESSTHANFIVE"
@@ -45,12 +58,29 @@ YNM_CHOICES = (
     (YNM_MAYBE, "Maybe"),
 )
 
+AREA_ART = "ART"
+AREA_INT = "INT"
+AREA_OPS = "OPS"
+AREA_RTG = "RTG"
+AREA_SEC = "SEC"
+AREA_TSG = "TSG"
+AREA_UNKNOWN = "UNKNOWN"
+
+IETF_AREAS = (
+    (AREA_ART, "Applications and Real-Time"),
+    (AREA_INT, "Internet"),
+    (AREA_OPS, "Operations and Management"),
+    (AREA_RTG, "Routing"),
+    (AREA_SEC, "Security"),
+    (AREA_TSG, "Transport"),
+    (AREA_UNKNOWN, "I don't know yet")
+)
+
 class Language(models.Model):
     language = models.CharField(max_length=32)
 
     def __unicode__(self):
         return self.language
-
 
 class Participant(models.Model):
     email = models.EmailField(primary_key=True)
@@ -59,10 +89,31 @@ class Participant(models.Model):
     affiliation = models.CharField(max_length=64)
     country = models.CharField('Country of residence',max_length=64)
     language = models.ForeignKey(Language,verbose_name='Preferred conversational language',max_length=32,default=1)
-    attend = models.CharField('IETF attendance',max_length=32, choices=ATTEND_CHOICES, default=ATTEND_NONE)
+    attend = models.CharField('Number of IETFs attended',max_length=32, choices=ATTEND_CHOICES, default=ATTEND_NONE)
     topics = models.TextField('What technical topics brought you to the IETF?')
-    areas = models.CharField('What IETF area(s) most interest you',help_text="ART, INT, OPS, RTG, SEC, TSG, I don't know yet",max_length=64)
-    groups = models.CharField('Which working groups are you most interested in?',help_text='see https://wwww.ietf.org/how/wgs',max_length=256)
+#    areas = models.MultipleChoiceField('What IETF area(s) most interest you',choices=IETF_AREAS,max_length=64)
+#     areas = models.ManyToManyField(Language,verbose_name='What IETF area(s) most interest you?', help_text="""<p>IETF Areas include:</p>
+# <ul>
+# <li>ART: Applications and Real-Time</li>
+# <li>INT: Internet</li>
+# <li>OPS: Operations and Management</li>
+# <li>RTG: Routing</li>
+# <li>SEC: Security</li>
+# <li>TSG: Transport</li>
+# <li>UNKNOWN: I don't know yet</li>
+# </ul><p>Further information <a href="https://www.ietf.org/topics/areas/"> is also avaliable about IETF areas</a>""", max_length=64)
+
+    areas = models.CharField('What IETF area(s) most interest you',help_text="""<p>IETF Areas include:</p>
+<ul>
+<li>ART: Applications and Real-Time</li>
+<li>INT: Internet</li>
+<li>OPS: Operations and Management</li>
+<li>RTG: Routing</li>
+<li>SEC: Security</li>
+<li>TSG: Transport</li>
+<li>UNKNOWN: I don't know yet</li>
+</ul><p>Further information <a href="https://www.ietf.org/topics/areas/"> is also avaliable about IETF areas</a>""",max_length=64)
+    groups = models.CharField('Which working groups are you most interested in?',help_text='see <a href="https://wwww.ietf.org/how/wgs">https://wwww.ietf.org/how/wgs</a>',max_length=256)
     gender_pref = models.CharField('Guide gender preference', max_length=32, choices=GEND_CHOICES, default=GEND_NOPREF)
     additional_info = models.TextField('Is there anything else you would like to share with us?')
 
@@ -73,7 +124,8 @@ class Participant(models.Model):
         attendmap = {
             ATTEND_NONE: "0",
             ATTEND_ONE: "1",
-            ATTEND_FEW: "2 to 4"
+            ATTEND_TWO: "2",
+            ATTEND_THREE: "3",
         }
         return attendmap[self.attend]
 
@@ -83,12 +135,14 @@ class Guide(models.Model):
     surname = models.CharField(max_length=64)
     affiliation = models.CharField(max_length=64)
     country = models.CharField('Country of residence',max_length=64)
+    gender = models.CharField("Gender", max_length=32, choices=GEND_TYPES, default=GEND_TYPE_FEMALE)
     language = models.ManyToManyField(Language,verbose_name='What languages can you communicate in fluently?', max_length=32)
     ietf_years = models.CharField('How long have you been participating in the IETF?', max_length=32, choices=YEARS_CHOICES, default = YEARS_LESSTHANFIVE)
     multiple_guided = models.CharField('Are you willing to work with more than one program participant?', max_length=32, choices=YNM_CHOICES, default=YNM_YES)
-    give_intro = models.CharField('Are you willing to give a general introduction of the IETF to a newcomer program participant?', max_length=32, choices=YNM_CHOICES, default=YNM_YES)
-    arrival_date = models.DateField('What date are you arriving at then next IETF meeting?')
-    additional_info = models.TextField('Is there anything else we should know?')
+    give_intro = models.CharField('Are you willing to give a general introduction of the IETF to a newcomer program participant?', max_length=32, choices=YNM_CHOICES, default=YNM_YES, help_text="<em>(Sometimes it is not possible to exactly match guides with participants and their preferred technical areas)</em>")
+    arrival_date = models.CharField('What date are you arriving at then next IETF meeting (MM/DD/YYYY)?', max_length=64)
+    additional_info = models.TextField('Is there anything else we should know?',
+                                       blank=True)
 
     def __unicode__(self):
         return "%s %s <%s>" % (self.given_name, self.surname, self.email)

@@ -9,7 +9,7 @@ from django.core import mail
 from django.contrib.auth.models import User
 
 from .utils import encode_email
-from .models import Guide, Participant, Match, Language, YEARS_MORETHANTEN, YNM_YES, ATTEND_FEW, GEND_NOPREF
+from .models import Guide, Participant, Match, Language, YEARS_MORETHANTEN, YNM_YES, ATTEND_TWO, ATTEND_THREE, GEND_NOPREF
 from .factories import GuideFactory, ParticipantFactory, MatchFactory, LanguageFactory
 
 class GuidesTests(TestCase):
@@ -87,7 +87,7 @@ class GuidesTests(TestCase):
                 affiliation="DoNotHave",
                 country="Old",
                 language="1",
-                attend=ATTEND_FEW,
+                attend=ATTEND_TWO,
                 topics="sandwiches",
                 areas="ART,+IRTF",
                 groups='anything+contining+"bis"',

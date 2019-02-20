@@ -2,9 +2,11 @@
 {% load bootstrap3 %}
 {% block title %}Enter IETF Guide Participation Details{% endblock %}
 {% block content %}
-<h2>Enter IETF Guide Participation Details</h2>
-<h3 style="margin-bottom: 1em;">Guide E-Mail: {{email}}</h3>
+<h2>Enter Your IETF Guide Details</h2>
+<h3 style="margin-bottom: 1em;">Registered Guide E-Mail: {{email}}</h3>
 <form method="post">{% csrf_token %}
+    {{ form.errors }}
+    {{ form.non_field_errors }}
     {% bootstrap_form form %}
     {% buttons %}
     <button type="submit" class="btn btn-primary">Save</button>

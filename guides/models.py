@@ -115,7 +115,7 @@ class Participant(models.Model):
 </ul><p>Further information <a href="https://www.ietf.org/topics/areas/"> is also avaliable about IETF areas</a>""",max_length=64)
     groups = models.CharField('Which working groups are you most interested in?',help_text='see <a href="https://wwww.ietf.org/how/wgs">https://wwww.ietf.org/how/wgs</a>',max_length=256)
     gender_pref = models.CharField('Guide gender preference', max_length=32, choices=GEND_CHOICES, default=GEND_NOPREF)
-    additional_info = models.TextField('Is there anything else you would like to share with us?')
+    additional_info = models.TextField('Is there anything else you would like to share with us?', blank=True)
 
     def __unicode__(self):
         return "%s %s <%s>" % (self.given_name, self.surname, self.email)

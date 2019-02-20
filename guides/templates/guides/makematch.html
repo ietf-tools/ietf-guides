@@ -44,17 +44,15 @@ margin-bottom:15px;
 <div class="row">
     <div class="col-md-6" id="left">
 	  {% for participant in form.fields.participant.queryset %}
-	  <input type="radio" name="participant" value="{{ participant.pk }}">
+	  <input type="radio" name="participant" value="{{ participant.pk }}" />
 	  {% include 'guides/participant_card.html' %}
-  	  </input>
   	  {% endfor %}
     </div>
 
     <div class="col-md-6" id="right">
 	  {% for guide in form.fields.guide.queryset %}
-	  <input type="radio" name="guide" value="{{ guide.pk }}">
+	  <input type="radio" name="guide" value="{{ guide.pk }}" />
 	  {% include 'guides/guide_card.html' %}
-	  </input>
 	  {% endfor %}
     </div>
 </div>

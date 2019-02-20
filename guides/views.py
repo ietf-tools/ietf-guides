@@ -61,7 +61,6 @@ def edit_info(request, hash):
     if not decode:
         raise Http404 
     (request_type, email) = decode
-    import sys
     form = None
     modelclass = Guide if request_type=='guide' else Participant
     formclass = GuideForm if request_type=='guide' else ParticipantForm

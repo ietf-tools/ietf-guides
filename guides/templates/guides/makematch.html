@@ -2,33 +2,33 @@
 {% block title %}IETF Guides{% endblock %}
 {% block morecss %}
 body, html {
-margin: 0;
-overflow: hidden;
-height:100%;
+  margin: 0;
+  overflow: hidden;
+  height:100%;
 }
 
 @media (min-width: 768px){
-#left {
-position: absolute;
-top: 200px;
-bottom: 0;
-left: 0;
-width: 50%;
-overflow-y: scroll; 
-}
+  #left {
+    position: absolute;
+    top: 200px;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    overflow-y: scroll; 
+  }
 
-#right {
-position: absolute;
-top: 200px;
-bottom: 0;
-right: 0;
-overflow-y: scroll;
-width: 50%;
-}
+  #right {
+    position: absolute;
+    top: 200px;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    width: 50%;
+  }
 }
 
 .card {
-margin-bottom:15px;
+  margin-bottom:15px;
 }
 
 
@@ -37,30 +37,30 @@ margin-bottom:15px;
 {% block content %}
 
 <form method="POST">{% csrf_token %}
-<div class="row">
-  <div class="col-md-6 text-center font-weight-bold">Participants</div>
-  <div class="col-md-6 text-center font-weight-bold">Guides</div>
-</div>
-<div class="row">
+  <div class="row">
+    <div class="col-md-6 text-center font-weight-bold">Participants</div>
+    <div class="col-md-6 text-center font-weight-bold">Guides</div>
+  </div>
+  <div class="row">
     <div class="col-md-12 text-center">
-	<button type="submit" class="btn btn-primary">Match</button>
+      <button type="submit" class="btn btn-primary">Match</button>
     </div>
-</div>
-<div class="row">
+  </div>
+  <div class="row">
     <div class="col-md-6" id="left">
-	{% for participant in form.fields.participant.queryset %}
-	<input type="radio" name="participant" value="{{ participant.pk }}" />
-	{% include 'guides/participant_card.html' %}
-  	{% endfor %}
+      {% for participant in form.fields.participant.queryset %}
+      <input type="radio" name="participant" value="{{ participant.pk }}" />
+      {% include 'guides/participant_card.html' %}
+      {% endfor %}
     </div>
 
     <div class="col-md-6" id="right">
-	{% for guide in form.fields.guide.queryset %}
-	<input type="radio" name="guide" value="{{ guide.pk }}" />
-	  {% include 'guides/guide_card.html' %}
-	  {% endfor %}
+      {% for guide in form.fields.guide.queryset %}
+      <input type="radio" name="guide" value="{{ guide.pk }}" />
+      {% include 'guides/guide_card.html' %}
+      {% endfor %}
     </div>
-</div>
+  </div>
 </form>
 
 {% endblock %}

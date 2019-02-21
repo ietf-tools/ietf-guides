@@ -64,7 +64,7 @@ DATABASES = {
     'default': {
         'NAME': 'ietf_guides',
         'ENGINE': 'django.db.backends.mysql',
-        'USER': 'csuser',
+        'USER': DB_USER or 'csuser',
         'PASSWORD': DB_PASSWORD,
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
     },
@@ -113,3 +113,5 @@ DEFAULT_BASE_EMAIL = 'something_legitimate@example.com'
 
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
+
+from .local import *

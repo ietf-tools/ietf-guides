@@ -11,7 +11,6 @@ import os
 import sys
 
 from django.core.wsgi import get_wsgi_application
-from django.conf import settings
 
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,6 +22,6 @@ if os.path.exists(virtualenv_activation):
 if not path in sys.path:
     sys.path.insert(0, path)
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings.DJANGO_SETTINGS_MODULE or "ietf_guides.settings.prod")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ietf_guides.settings.prod")
 
 application = get_wsgi_application()

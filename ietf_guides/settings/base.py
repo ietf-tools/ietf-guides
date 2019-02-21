@@ -60,11 +60,14 @@ WSGI_APPLICATION = 'ietf_guides.wsgi.application'
 #    }
 #}
 
+if not 'DB_USER' in locals():
+    DB_USER = 'csuser'
+
 DATABASES = {
     'default': {
         'NAME': 'ietf_guides',
         'ENGINE': 'django.db.backends.mysql',
-        'USER': DB_USER or 'csuser',
+        'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
     },

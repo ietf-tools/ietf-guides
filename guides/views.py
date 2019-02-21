@@ -74,6 +74,13 @@ def edit_info(request, hash):
             obj.email = email
             obj.save()
             form.save_m2m()
+            message='IETF {} {} {} <{}> has {} their information'.format(request_type, obj.given_name, obj.surname, obj.email, 'updated' if instance else 'created')
+            send_mail(
+                subject=message,
+                message=message,
+                from_email = settings.DEFAULT_FROM_EMAIL,
+                recipient_list = [settings.DEFAULT_FROM_EMAIL],
+            )
             return render(request,'guides/saved.html', dict(obj=obj))
 
     template = 'guides/edit_info_guide.html' if request_type=='guide' else 'guides/edit_info_participant.html'

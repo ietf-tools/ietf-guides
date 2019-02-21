@@ -1,13 +1,20 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
-{% block title %}Edit IETF Guide program info{% endblock %}
+{% block title %}Enter Your Participation Information{% endblock %}
 {% block content %}
-  <h2>Edit IETF Guide Program Info</h2>
-  <h3>Participant: {{email}}</h3>
+  <h2>Enter Your IETF Participation Information</h2>
+
+  <p>The IETF Guides program does its best to match you with a Guide that shares common interests and spoken languages.  Note, though it is not always possible to perform perfect matches, all of our experienced Guides will be ablp introduce you to the processes and culture of the IETF.  Please fill out the following form to help us match you with the best guide.</p>
+
+  <h3 style="margin-bottom: 1em;">Registered Participant E-Mail: {{email}}</h3>
   <form method="post">{% csrf_token %}
     {% bootstrap_form form %}
     {% buttons %}
       <button type="submit" class="btn btn-primary">Save</button>
     {% endbuttons %}
   </form>
+
+  <h3>Information storage policy</h3>
+
+  <p>The information stored in the Guides system is cleared between every IETF.  You will need to reapply for each IETF if you wish to have a guide assigned for your second or third IETF.</p>
 {% endblock %}

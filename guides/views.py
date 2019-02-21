@@ -65,6 +65,8 @@ def edit_info(request, hash):
     modelclass = Guide if request_type=='guide' else Participant
     formclass = GuideForm if request_type=='guide' else ParticipantForm
     instance = modelclass.objects.filter(email=email).first()
+
+    # handle submissions
     if request.method == 'POST':
         form = formclass(request.POST)
         if form.is_valid():
@@ -73,6 +75,7 @@ def edit_info(request, hash):
             obj.save()
             form.save_m2m()
             return render(request,'guides/saved.html', dict(obj=obj))
+
     template = 'guides/edit_info_guide.html' if request_type=='guide' else 'guides/edit_info_participant.html'
     if not form:
         form = formclass(instance=instance) if instance else formclass()

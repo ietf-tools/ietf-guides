@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
-{% block title %}Edit IETF Guide program info{% endblock %}
+{% block title %}Enter IETF Guide Participation Details{% endblock %}
 {% block content %}
-  <h2>Edit IETF Guide Program Info</h2>
-  <h3>Guide: {{email}}</h3>
+  <h2>Enter Your IETF Guide Details</h2>
+  <h3 style="margin-bottom: 1em;">Registered Guide E-Mail: {{email}}</h3>
   <form method="post">{% csrf_token %}
+    {{ form.errors }}
+    {{ form.non_field_errors }}
     {% bootstrap_form form %}
     {% buttons %}
       <button type="submit" class="btn btn-primary">Save</button>
     {% endbuttons %}
   </form>
+  <h3>Information storage policy</h3>
+
+  <p>The information stored in the Guides system is cleared between every IETF.  If above you marked you're willing to be a guide at future meetings, we will keep your information to avoid you having to retype it next time.  Don't select this checkbox if you'd rather we erase your participation information between IETFs.</p>
 {% endblock %}

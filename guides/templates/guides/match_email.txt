@@ -1,19 +1,59 @@
-Thanks for participating in the IETF Guides Program!
+Dear {{match.participant.given_name}} and {{match.guide.given_name}},
 
-{{ match.participant.given_name }},
+Welcome to the mentoring programme! In this programme we aim to
+facilitate knowledge transfer between experienced IETF-ers and new
+participants in the community. The IETF is not your typical
+organization so some help along the way might help you make your
+landing a bit smoother, so you will stay with us longer!
 
-Your guide for the next IETF will be {{ match.guide.given_name }} {{ match.guide.surname}}.
+It is my pleasure to introduce you to each other. {{match.guide.given_name}} has
+kindly offered to be {{match.participant.given_name}}'s mentor for the upcoming
+IETF meeting. {{match.participant.given_name}} has expressed a specific interest in:
 
-Your guide can be reached at {{ match.guide.email }}
+  Topics: {{ match.participant.topics }}
 
-{{ match.guide.given_name}},
+  Areas: {{ match.participant.areas }}
 
-This participant's name is {{ match.participant.given_name }} {{ match.participant.surname }}.
+  Groups: {{ match.participant.groups }}
 
-Their interests are:
+The mentorship aims to have three parts: 
 
-Topics: {{ match.participant.topics }}
+0. Introduction conversations before the meeting
+1. Face to face meeting at the beginning of the meeting
+2. Check-in during the week.
 
-Areas: {{ match.participant.areas }}
+It would be great if you could meet early in the week and discuss
+questions, interests, and 'how-to-get-things-done' in the IETF,
+and perhaps have a follow-up during the week to check-in whether
+there are any questions.  Hopefully you'll both have the chance
+to attend the newcomer's meet-and-greet on Sunday at 16:00.
 
-Groups: {{ match.participant.groups }}
+You both have the responsibility to make meetings between you happen,
+but it would be great if the mentor would take the lead in setting up
+the first meeting.
+
+As mentee it would help if you follow your interests within the IETF:
+Ask the mentor what you think you need to make the meeting a
+success. The mentor is there to help you, but the mentor likely also
+knows many things that "you don't know you need to know"!
+
+Good topics of conversation include the IETF toolchain, the meeting
+agenda, the IETF app, how to use jabber rooms, the IETF document
+datatracker (where all Internet Drafts, Working Group and Research
+Group agenda's and RFCs can be found), and more! Much of this info can
+also be found in the Tao of the IETF at https://ietf.org/tao .
+
+Specific questions about your favorite topics of interest are wise to
+discuss such as: relevant working groups or research groups, relevant
+authors, working group chairs and area directors.  You might want to
+discuss trending issues in the upcoming meetings (also check the ISOC
+"rough guides" in the IETF journal)
+
+Please let us if there is any way in which we can support your
+interactions.  Please mail any questions you have to
+mentoring-coordinators@ietf.org.
+
+Cheers,
+Wes Hardaker
+IETF Guides Program Lead
+

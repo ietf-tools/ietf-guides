@@ -135,7 +135,7 @@ class Guide(models.Model):
     surname = models.CharField(max_length=64)
     affiliation = models.CharField(max_length=64)
     country = models.CharField('Country of residence',max_length=64)
-    gender = models.CharField("Gender", max_length=32, choices=GEND_TYPES, default=GEND_TYPE_FEMALE)
+    gender = models.CharField("Gender", max_length=32)
     language = models.ManyToManyField(Language,verbose_name='What languages can you communicate in fluently?', max_length=32)
     ietf_years = models.CharField('How long have you been participating in the IETF?', max_length=32, choices=YEARS_CHOICES, default = YEARS_LESSTHANFIVE)
     multiple_guided = models.CharField('Are you willing to work with more than one program participant?', max_length=32, choices=YNM_CHOICES, default=YNM_YES)

@@ -5,7 +5,7 @@ import random
 
 from itertools import combinations
 
-from guides.models import Guide, Participant, Match, Language, \
+from guides.models import Guide, Participant, Match, Language, Area,\
     GEND_NOPREF, GEND_MALE, GEND_FEMALE, \
     ATTEND_NONE, ATTEND_ONE, ATTEND_TWO, ATTEND_THREE, \
     YEARS_LESSTHANFIVE, YEARS_FIVETOTEN, YEARS_MORETHANTEN
@@ -24,10 +24,21 @@ class ParticipantFactory(factory.DjangoModelFactory):
     language = factory.fuzzy.FuzzyChoice(Language.objects.all())
     attend = factory.fuzzy.FuzzyChoice([ATTEND_NONE,ATTEND_ONE, ATTEND_TWO, ATTEND_THREE])
     topics = factory.Faker('bs')
-    areas = factory.fuzzy.FuzzyChoice(["ART", "INT", "OPS", "RTG", "SEC", "TSG", "I don't know yet"])
     groups = factory.fuzzy.FuzzyChoice(['stir', 'saag', 'iotrg',])
     gender_pref = factory.fuzzy.FuzzyChoice([GEND_NOPREF,GEND_MALE,GEND_FEMALE])
     additional_info = factory.Faker('bs')
+
+    @factory.post_generation
+    def areas(self, create, extracted, **kwargs):
+        if create:
+            if extracted:
+                for area in extracted:
+                    self.areas.add(area)
+            else:
+                l = list(combinations(Area.objects.all(),2))
+                choice = l[random.randint(0,len(l)-1)]
+                for area in choice:
+                    self.areas.add(area) 
 
 
 class GuideFactory(factory.DjangoModelFactory):
@@ -69,3 +80,8 @@ class LanguageFactory(factory.DjangoModelFactory):
 
     language = factory.Faker('word')
 
+class AreaFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Area
+
+    area = factory.Faker('word')

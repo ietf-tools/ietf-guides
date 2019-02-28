@@ -9,7 +9,7 @@ class EmailForm(forms.Form):
 
 GuideForm = forms.modelform_factory(Guide,exclude=['email',], widgets={'language':forms.CheckboxSelectMultiple(),})
 
-ParticipantForm = forms.modelform_factory(Participant,exclude=['email',])
+ParticipantForm = forms.modelform_factory(Participant,exclude=['email',], widgets={'areas':forms.CheckboxSelectMultiple(),})
 
 class MatchForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

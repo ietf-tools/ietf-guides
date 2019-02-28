@@ -10,13 +10,14 @@ from django.contrib.auth.models import User
 
 from .utils import encode_email
 from .models import Guide, Participant, Match, Language, YEARS_MORETHANTEN, YNM_YES, ATTEND_TWO, ATTEND_THREE, GEND_NOPREF
-from .factories import GuideFactory, ParticipantFactory, MatchFactory, LanguageFactory
+from .factories import GuideFactory, ParticipantFactory, MatchFactory, LanguageFactory, AreaFactory
 
 class GuidesTests(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='password', email='tester@example.com')
         LanguageFactory.create_batch(10)
+        AreaFactory.create_batch(8)
 
     def test_index(self):
         url = reverse('guides.views.index', kwargs=dict())
@@ -89,7 +90,7 @@ class GuidesTests(TestCase):
                 language="1",
                 attend=ATTEND_TWO,
                 topics="sandwiches",
-                areas="ART,+IRTF",
+                areas=[1,3],
                 groups='anything+contining+"bis"',
                 gender_pref=GEND_NOPREF,
                 additional_info="peace",

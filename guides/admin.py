@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from .models import Guide, Participant, Language, Match
+from .models import Guide, Participant, Language, Match, Area
 
 # Register your models here.
 
@@ -19,7 +19,11 @@ class LanguageAdmin(admin.ModelAdmin):
 class MatchAdmin(admin.ModelAdmin):
     model = Match
 
+class AreaAdmin(admin.ModelAdmin):
+    models = Area
+
 admin.site.register(Guide, GuideAdmin)
 admin.site.register(Participant, ParticipantAdmin)
 admin.site.register(Language, LanguageAdmin)
 admin.site.register(Match, MatchAdmin)
+admin.site.register(Area, AreaAdmin)

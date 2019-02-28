@@ -76,6 +76,12 @@ IETF_AREAS = (
     (AREA_UNKNOWN, "I don't know yet")
 )
 
+class Area(models.Model):
+    area = models.CharField(max_length=64)
+
+    def __unicode__(self):
+        return self.area
+
 class Language(models.Model):
     language = models.CharField(max_length=32)
 
@@ -91,29 +97,8 @@ class Participant(models.Model):
     language = models.ForeignKey(Language,verbose_name='Preferred conversational language',max_length=32,default=1)
     attend = models.CharField('Number of IETFs attended',max_length=32, choices=ATTEND_CHOICES, default=ATTEND_NONE)
     topics = models.TextField('What technical topics brought you to the IETF?')
-#    areas = models.MultipleChoiceField('What IETF area(s) most interest you',choices=IETF_AREAS,max_length=64)
-#     areas = models.ManyToManyField(Language,verbose_name='What IETF area(s) most interest you?', help_text="""<p>IETF Areas include:</p>
-# <ul>
-# <li>ART: Applications and Real-Time</li>
-# <li>INT: Internet</li>
-# <li>OPS: Operations and Management</li>
-# <li>RTG: Routing</li>
-# <li>SEC: Security</li>
-# <li>TSG: Transport</li>
-# <li>UNKNOWN: I don't know yet</li>
-# </ul><p>Further information <a href="https://www.ietf.org/topics/areas/"> is also avaliable about IETF areas</a>""", max_length=64)
-
-    areas = models.CharField('What IETF area(s) most interest you',help_text="""<p>IETF Areas include:</p>
-<ul>
-<li>ART: Applications and Real-Time</li>
-<li>INT: Internet</li>
-<li>OPS: Operations and Management</li>
-<li>RTG: Routing</li>
-<li>SEC: Security</li>
-<li>TSG: Transport</li>
-<li>UNKNOWN: I don't know yet</li>
-</ul><p>Further information <a href="https://www.ietf.org/topics/areas/"> is also avaliable about IETF areas</a>""",max_length=64)
-    groups = models.CharField('Which working groups are you most interested in?',help_text='see <a href="https://wwww.ietf.org/how/wgs">https://wwww.ietf.org/how/wgs</a>',max_length=256)
+    areas = models.ManyToManyField(Area, verbose_name='What IETF area(s) most interest you?', help_text = 'Further information about IETF areas is available <a href="https://www.ietf.org/topics/areas/">here</a>.' )
+    groups = models.CharField('Which working groups are you most interested in?',help_text='see <a href="https://www.ietf.org/how/wgs">https://wwww.ietf.org/how/wgs</a>',max_length=256)
     gender_pref = models.CharField('Guide gender preference', max_length=32, choices=GEND_CHOICES, default=GEND_NOPREF)
     additional_info = models.TextField('Is there anything else you would like to share with us?', blank=True)
 
@@ -136,7 +121,7 @@ class Guide(models.Model):
     affiliation = models.CharField(max_length=64)
     country = models.CharField('Country of residence',max_length=64)
     gender = models.CharField("Gender", max_length=32, default="", blank=True)
-    language = models.ManyToManyField(Language,verbose_name='What languages can you communicate in fluently?', max_length=32)
+    language = models.ManyToManyField(Language,verbose_name='What languages can you communicate in fluently?')
     ietf_years = models.CharField('How long have you been participating in the IETF?', max_length=32, choices=YEARS_CHOICES, default = YEARS_LESSTHANFIVE)
     multiple_guided = models.CharField('Are you willing to work with more than one program participant?', max_length=32, choices=YNM_CHOICES, default=YNM_YES)
     give_intro = models.CharField('Are you willing to give a general introduction of the IETF to a newcomer program participant?', max_length=32, choices=YNM_CHOICES, default=YNM_YES, help_text="<em>(Sometimes it is not possible to exactly match guides with participants and their preferred technical areas)</em>")

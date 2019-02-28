@@ -7,6 +7,7 @@ install:
   - echo "DEFAULT_FROM_EMAIL = 'test@example.org'" > ietf_guides/settings/local.py
   - echo "SECRET_KEY = 'notsosecret'" > ietf_guides/settings/secrets.py
   - echo "HASHSALT = 'somesalt'" >> ietf_guides/settings/secrets.py
+  - echo "DB_PASSWORD = 'irrelevant'" >> ietf_guides/settings/secrets.py
 # command to run tests
 script:
   - ./manage.py test --settings=ietf_guides.settings.test

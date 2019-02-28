@@ -49,6 +49,23 @@ class GuidesTests(TestCase):
         hash = encode_email('good@example.com','guide')
         self.assertIn(hash, unicode(mail.outbox[-1].body))
 
+    def test_request_guide(self):
+        url = reverse('guides.views.request_guide', kwargs=dict())
+        r = self.client.get(url)
+        self.assertEqual(r.status_code,200)
+        r = self.client.post(url,dict(email='bad@address'))
+        self.assertEqual(r.status_code,200)
+        q = PyQuery(r.content)
+        self.assertTrue(q('form>.has-error'))
+        r = self.client.post(url,dict(email='good@example.com'))
+        self.assertEqual(r.status_code,200)
+        q = PyQuery(r.content)
+        self.assertFalse(q('form>.has-error'))
+        self.assertEqual(len(mail.outbox),1)
+        self.assertEqual(mail.outbox[-1].to,['good@example.com'])
+        hash = encode_email('good@example.com','participant')
+        self.assertIn(hash, unicode(mail.outbox[-1].body))
+
     def test_edit_info(self):
         url = reverse('guides.views.edit_info', kwargs=dict(hash='abIEBSDHeb235Heb3sii8EEsgarbage'))
         r = self.client.get(url)

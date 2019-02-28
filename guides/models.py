@@ -78,6 +78,7 @@ IETF_AREAS = (
 
 class Area(models.Model):
     area = models.CharField(max_length=64)
+    short = models.CharField(max_length=12,default="")
 
     def __unicode__(self):
         return self.area
@@ -98,7 +99,7 @@ class Participant(models.Model):
     attend = models.CharField('Number of IETFs attended',max_length=32, choices=ATTEND_CHOICES, default=ATTEND_NONE)
     topics = models.TextField('What technical topics brought you to the IETF?')
     areas = models.ManyToManyField(Area, verbose_name='What IETF area(s) most interest you?', help_text = 'Further information about IETF areas is available <a href="https://www.ietf.org/topics/areas/">here</a>.' )
-    groups = models.CharField('Which working groups are you most interested in?',help_text='see <a href="https://www.ietf.org/how/wgs">https://wwww.ietf.org/how/wgs</a>',max_length=256)
+    groups = models.CharField('Which working groups are you most interested in?',help_text='see <a href="https://www.ietf.org/how/wgs">https://www.ietf.org/how/wgs</a>',max_length=256)
     gender_pref = models.CharField('Guide gender preference', max_length=32, choices=GEND_CHOICES, default=GEND_NOPREF)
     additional_info = models.TextField('Is there anything else you would like to share with us?', blank=True)
 
@@ -125,6 +126,8 @@ class Guide(models.Model):
     ietf_years = models.CharField('How long have you been participating in the IETF?', max_length=32, choices=YEARS_CHOICES, default = YEARS_LESSTHANFIVE)
     multiple_guided = models.CharField('Are you willing to work with more than one program participant?', max_length=32, choices=YNM_CHOICES, default=YNM_YES)
     give_intro = models.CharField('Are you willing to give a general introduction of the IETF to a newcomer program participant?', max_length=32, choices=YNM_CHOICES, default=YNM_YES, help_text="<em>(Sometimes it is not possible to exactly match guides with participants and their preferred technical areas)</em>")
+    areas = models.ManyToManyField(Area, verbose_name='What IETF area(s) are you involved in?')
+    groups = models.CharField('Which working groups are you willing to guide for?', max_length=256, default="", blank=True)
     arrival_date = models.CharField('What date are you arriving at then next IETF meeting (MM/DD/YYYY)?', max_length=64)
     additional_info = models.TextField('Is there anything else we should know?',
                                        blank=True)

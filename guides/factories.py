@@ -51,6 +51,7 @@ class GuideFactory(factory.DjangoModelFactory):
     affiliation = factory.Faker('company')
     country = factory.Faker('country')
     ietf_years = factory.fuzzy.FuzzyChoice([YEARS_LESSTHANFIVE, YEARS_FIVETOTEN, YEARS_MORETHANTEN])
+    groups = factory.fuzzy.FuzzyChoice(['stir', 'saag', 'iotrg',])
     arrival_date = factory.Faker('date')
     additional_info = factory.Faker('bs')
 
@@ -65,6 +66,18 @@ class GuideFactory(factory.DjangoModelFactory):
                 choice = l[random.randint(0,len(l)-1)]
                 for language in choice:
                     self.language.add(language)
+
+    @factory.post_generation
+    def areas(self, create, extracted, **kwargs):
+        if create:
+            if extracted:
+                for area in extracted:
+                    self.areas.add(area)
+            else:
+                l = list(combinations(Area.objects.all(),2))
+                choice = l[random.randint(0,len(l)-1)]
+                for area in choice:
+                    self.areas.add(area)                     
 
 
 class MatchFactory(factory.DjangoModelFactory):
@@ -85,3 +98,4 @@ class AreaFactory(factory.DjangoModelFactory):
         model = Area
 
     area = factory.Faker('word')
+    short = factory.Faker('word')

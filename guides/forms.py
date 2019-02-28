@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 class EmailForm(forms.Form):
     email = forms.EmailField(label=u'Email address', required=True)
 
-GuideForm = forms.modelform_factory(Guide,exclude=['email',], widgets={'language':forms.CheckboxSelectMultiple(),})
+GuideForm = forms.modelform_factory(Guide,exclude=['email',], widgets={'language':forms.CheckboxSelectMultiple(),'areas':forms.CheckboxSelectMultiple(),})
 
 ParticipantForm = forms.modelform_factory(Participant,exclude=['email',], widgets={'areas':forms.CheckboxSelectMultiple(),})
 

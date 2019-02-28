@@ -85,7 +85,9 @@ class GuidesTests(TestCase):
                 ietf_years=YEARS_MORETHANTEN,
                 multiple_guided=YNM_YES,
                 give_intro=YNM_YES,
-                arrival_date="2019-03-15",
+                areas=[2,5],
+                groups='blarg, burgle, baz',
+                arrival_date="2019-03-15"   ,
                 additional_info="Nope.",               
             )
         )

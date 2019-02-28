@@ -24,6 +24,8 @@
         <span>Multiple: {{ guide.multiple_guided }}</span>
         <span class="float-right">Intro: {{ guide.give_intro }}</span>
       </div>
+      <div>Areas: {% for area in guide.areas.all %}{{area.short }} {% endfor %}</div>
+      <div>Groups: {{ guide.groups }}</div>
       <div>Arrives: {{ guide.arrival_date }}</div>
       <div>Other: {{ guide.additional_info }}</div>
     </div>

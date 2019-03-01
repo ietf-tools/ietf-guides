@@ -12,7 +12,7 @@ A small django project to help match IETF guide program guides to participants
   - DB_PASSWORD  (see settings/base.py for how this is used)
   - HASHSALT     (some short string - see guides/utils.py for how this is used)
 * create ietf_guides/settings/local.py and add values to override settings in whatever mode you are running in (it is included last in base.py). It's sufficient to just have an empty file.
-* set up a mysql database and a user that has all privileges with it. It might be easiest at this point to use the database name and user in settings/base.py. If you need to use something different, please extend settings with a local.py (add that to .gitignore) to override base.
+* set up a mysql database and a user that has all privileges with it.
 * export which settings you want to use as DJANGO_SETTINGS_MODULE (e.g. ietf_guides.settings.dev) or supply settings on the command line as necessary
 * ./manage.py migrate
 * ./manage.py test --settings=ietf_guides.settings.test

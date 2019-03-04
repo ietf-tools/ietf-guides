@@ -127,10 +127,11 @@ class Guide(models.Model):
     multiple_guided = models.CharField('Are you willing to work with more than one program participant?', max_length=32, choices=YNM_CHOICES, default=YNM_YES)
     give_intro = models.CharField('Are you willing to give a general introduction of the IETF to a newcomer program participant?', max_length=32, choices=YNM_CHOICES, default=YNM_YES, help_text="<em>(Sometimes it is not possible to exactly match guides with participants and their preferred technical areas)</em>")
     areas = models.ManyToManyField(Area, verbose_name='What IETF area(s) are you involved in?')
-    groups = models.CharField('Which working groups are you willing to guide for?', max_length=256, default="", blank=True)
-    arrival_date = models.CharField('What date are you arriving at then next IETF meeting (MM/DD/YYYY)?', max_length=64)
+    groups = models.CharField('Which working groups are you most able to help people with?', max_length=256, default="", blank=True)
+    arrival_date = models.CharField('What date are you arriving at then next IETF meeting (YYYY/MM/DD)?', max_length=64)
     additional_info = models.TextField('Is there anything else we should know?',
                                        blank=True)
+    keep_for_nexttime = models.BooleanField("Should we keep your registration data around for future participation in the guides program?", default=False)
 
     def __unicode__(self):
         return "%s %s <%s>" % (self.given_name, self.surname, self.email)

@@ -131,6 +131,7 @@ class Guide(models.Model):
     arrival_date = models.CharField('What date are you arriving at then next IETF meeting (YYYY/MM/DD)?', max_length=64)
     additional_info = models.TextField('Is there anything else we should know?',
                                        blank=True)
+    keep_for_nexttime = models.BooleanField("Should we keep your registration data around for future participation in the guides program?", default=False)
 
     def __unicode__(self):
         return "%s %s <%s>" % (self.given_name, self.surname, self.email)

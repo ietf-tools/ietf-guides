@@ -12,7 +12,7 @@ IETF meeting. {{match.participant.given_name}} has expressed a specific interest
 
   Topics: {{ match.participant.topics }}
 
-  Areas: {{ match.participant.areas }}
+  Areas: {{ match.participant.areas.all|join:", " }}
 
   Groups: {{ match.participant.groups }}
 

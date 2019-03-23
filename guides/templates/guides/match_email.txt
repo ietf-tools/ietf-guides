@@ -1,14 +1,16 @@
 Dear {{match.participant.given_name}} and {{match.guide.given_name}},
 
-Welcome to the mentoring programme! In this programme we aim to
+Welcome to the guides programme! In this programme we aim to
 facilitate knowledge transfer between experienced IETF-ers and new
 participants in the community. The IETF is not your typical
 organization so some help along the way might help you make your
 landing a bit smoother, so you will stay with us longer!
 
-It is my pleasure to introduce you to each other. {{match.guide.given_name}} has
-kindly offered to be {{match.participant.given_name}}'s mentor for the upcoming
-IETF meeting. {{match.participant.given_name}} has expressed a specific interest in:
+It is my pleasure to introduce you to each
+other. {{match.guide.given_name}} has kindly offered to be
+{{match.participant.given_name}}'s guide for the upcoming IETF
+meeting. {{match.participant.given_name}} has expressed a specific
+interest in:
 
   Topics: {{ match.participant.topics }}
 
@@ -16,7 +18,7 @@ IETF meeting. {{match.participant.given_name}} has expressed a specific interest
 
   Groups: {{ match.participant.groups }}
 
-The mentorship aims to have three parts: 
+The IETF guides program aims to have three parts: 
 
 0. Introduction conversations before the meeting
 1. Face to face meeting at the beginning of the meeting
@@ -29,19 +31,22 @@ there are any questions.  Hopefully you'll both have the chance
 to attend the newcomer's meet-and-greet on Sunday at 16:00.
 
 You both have the responsibility to make meetings between you happen,
-but it would be great if the mentor would take the lead in setting up
+but it would be great if the guide would take the lead in setting up
 the first meeting.
 
-As mentee it would help if you follow your interests within the IETF:
-Ask the mentor what you think you need to make the meeting a
-success. The mentor is there to help you, but the mentor likely also
-knows many things that "you don't know you need to know"!
+As an IETF participant it would help if you follow your interests
+within the IETF: Ask the guide what you think you need to make the
+meeting a success. The guide is there to help you, but the guide
+likely also knows many things that "you don't know you need to know"!
 
 Good topics of conversation include the IETF toolchain, the meeting
 agenda, the IETF app, how to use jabber rooms, the IETF document
 datatracker (where all Internet Drafts, Working Group and Research
 Group agenda's and RFCs can be found), and more! Much of this info can
 also be found in the Tao of the IETF at https://ietf.org/tao .
+Additionally, we have prepared the following list of conversation
+topics that past participants have found useful to discuss:
+https://www.isi.edu/~hardaker/ietf/topics.html
 
 Specific questions about your favorite topics of interest are wise to
 discuss such as: relevant working groups or research groups, relevant

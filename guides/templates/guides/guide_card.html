@@ -1,3 +1,4 @@
+{% load guides_tags %}
 <div class="card">
   <div class="card-header">
     <div>
@@ -26,7 +27,7 @@
       </div>
       <div>Areas: {% for area in guide.areas.all %}{{area.short }} {% endfor %}</div>
       <div>Groups: {{ guide.groups }}</div>
-      <div>Arrives: {{ guide.arrival_date }}</div>
+      <div>Arrives: {{ guide.arrival_date }} {{guide.arrival_date|stalecheck}}</div>
       <div>Gender: {{ guide.gender }}</div>
       <div>Other: {{ guide.additional_info }}</div>
     </div>

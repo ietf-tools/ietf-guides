@@ -7,5 +7,11 @@
   <div>
     <a href="{% url 'guides.views.make_match' %}" class="btn btn-primary">Make Matches</a>
   </div>
+  <div>Participants: {{stats.participants}}</div>
+  <div>Guides: {{stats.guides}}</div>
+  <div>Matches: {{stats.matches }}</div>
+  <div>Unmatched participants: {{stats.unmatched}}</div>
+  <div>Unmatched guides: {{stats.guides_unused}}</div>
+  <div>Guides matched but willing to take more: {{stats.guides_matched_but_willing}}</div>
 
 {% endblock %}

@@ -9,7 +9,7 @@ from .models import Guide, Participant, Language, Match, Area
 
 class GuideAdmin(admin.ModelAdmin):
     model = Guide
-    list_display = ('__str__','keep_for_nexttime',)
+    list_display = ('__str__','keep_for_nexttime','arrival_date')
 
 class ParticipantAdmin(admin.ModelAdmin):
     model = Participant

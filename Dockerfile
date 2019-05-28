@@ -32,21 +32,5 @@ RUN chown wwwrun:www /code/static
 
 RUN pip install -r requirements.txt
 
-#RUN echo "import os" > ietf_guides/settings/local.py
-#RUN echo "BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))" >> ietf_guides/settings/local.py
-#RUN echo "SECRET_KEY='garbage'" >> ietf_guides/settings/local.py
-#RUN echo "DATABASES = {" >> ietf_guides/settings/local.py
-#RUN echo "    'default': {" >> ietf_guides/settings/local.py
-#RUN echo "        'ENGINE': 'django.db.backends.sqlite3'," >> ietf_guides/settings/local.py
-#RUN echo "        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')," >> ietf_guides/settings/local.py
-#RUN echo "    }" >> ietf_guides/settings/local.py
-#RUN echo "}" >> ietf_guides/settings/local.py
-
-#RUN echo "DB_PASSWORD='garbage'" >> ietf_guides/settings/secrets.py
-
-#ENV DJANGO_SETTINGS_MODULE=ietf_guides.settings.prod
-#RUN ./manage.py runmodwsgi --setup-only --port 8002 --user wwwrun --group www --access-log --server-root /code/mod_wsgi-express-8002 --log-directory /code/logs
-#RUN rm ietf_guides/settings/local.py ietf_guides/settings/local.pyc ietf_guides/settings/secrets.py ietf_guides/settings/secrets.pyc
-
 ENTRYPOINT ./docker-entry.sh
 

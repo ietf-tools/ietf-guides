@@ -2,6 +2,8 @@ language: python
 python:
   - "2.7"
 # command to install dependencies
+before_install:
+  - sudo apt-get install -y apache2
 install:
   - pip install -r requirements.txt
   - echo "DEFAULT_FROM_EMAIL = 'test@example.org'" > ietf_guides/settings/local.py

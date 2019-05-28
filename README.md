@@ -11,6 +11,7 @@ A small django project to help match IETF guide program guides to participants
 * create ietf_guides/settings/local.py and add values for
   - SECRET_KEY   (this is the usual django SECRET_KEY)
   - HASHSALT     (some short string - see guides/utils.py for how this is used)
+  - DEFAULT_FROM_EMAIL
   - DATABASES    (a dict matching the database you set up above)
 ```
 Some possible DATABASE dicts:

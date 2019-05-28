@@ -14,13 +14,12 @@ if [ -n "${WWWRUN_UID}" -o -n "${WWW_GID}" ]; then
   chown -R wwwrun:www /code
 fi
 
+export DJANGO_SETTINGS_MODULE=ietf_guides.settings.prod
+
 sudo -E -u wwwrun ./manage.py migrate
 
-./mod_wsgi-express-8002/apachectl start
+sudo -E -u wwwrun ./manage.py collectstatic --noinput
 
-echo "[hit enter key to exit] or run 'docker stop <container>'"
-read
-
-./mod_wsgi-express-8002/apachectl stop
+./manage.py runmodwsgi --port 8002 --user wwwrun --group www --access-log --server-root /code/mod_wsgi-express-8002 --log-directory /code/logs
 
 echo "exited $0"

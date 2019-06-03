@@ -3,7 +3,7 @@ python:
   - "3.6"
 # command to install dependencies
 before_install:
-  - sudo apt-get install -y apache2
+  - sudo apt-get install -y apache2 apache2-dev
 install:
   - pip install -r requirements.txt
   - echo "DEFAULT_FROM_EMAIL = 'test@example.org'" > ietf_guides/settings/local.py

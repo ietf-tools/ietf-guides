@@ -3,8 +3,8 @@ A small django project to help match IETF guide program guides to participants
 
 ## setup for a development environment
 * check out a working copy
-* create and activate a python2.7 virtualenv
-  - virtualenv .
+* create and activate a python3 virtualenv
+  - virtualenv --python=python 3 .
   - . bin/activate
   - pip install -r requirements.txt
 * set up a database and a user that has all privileges with it.

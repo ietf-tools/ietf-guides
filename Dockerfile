@@ -9,14 +9,14 @@ RUN zypper -n install \
         gcc-c++ \
         libmysqlclient-devel\
         mysql-client \
-        python2 \
-        python2-devel \
-        python2-mysqlclient \
-        python2-pip \
+        python3 \
+        python3-devel \
+        python3-mysqlclient \
+        python3-pip \
         sqlite3 \
         sudo
 
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python2 5
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 5
 
 EXPOSE 8002:8002
 

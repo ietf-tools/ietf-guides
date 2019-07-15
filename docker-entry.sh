@@ -14,12 +14,12 @@ if [ -n "${WWWRUN_UID}" -o -n "${WWW_GID}" ]; then
   chown -R wwwrun:www /code
 fi
 
-if [ ! -f "ietf_guides/settings/local.py" ]; then
+if [ ! -f "/code/ietf_guides/settings/local.py" ]; then
     echo "local.py not found. Exiting."
     exit 1
 fi
 
-if [ ! -d "mod_wsgi-express-8002" ]; then
+if [ ! -d "/code/mod_wsgi-express-8002" ]; then
     echo "mod_wsgi-express-8002 not found. Exiting."
     exit 1
 fi

@@ -110,13 +110,20 @@ def make_match(request):
 
 @login_required
 def send_match_email(request, match_id):
-   match = get_object_or_404(Match, id=match_id)
-   if request.method=='POST':
-        form = MatchEmailForm(request.POST, match=match)
-        if form.is_valid():
-           message = form.cleaned_data['message'] 
-           send_mail(subject='IETF Guide Program Match', message=message, from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=[match.participant.email, match.guide.email, match.by.email])
-           return redirect(reverse('guides.views.matcher_index'))
-   form = MatchEmailForm(match = match) 
-   return render(request,'guides/send_match_email.html',dict(match=match, form=form))
+    match = get_object_or_404(Match, id=match_id)
+    if request.method=='POST':
+        if request.POST.get("send"):
+            form = MatchEmailForm(request.POST, match=match)
+            if form.is_valid():
+               message = form.cleaned_data['message'] 
+               send_mail(subject='IETF Guide Program Match', message=message, from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=[match.participant.email, match.guide.email, match.by.email])
+               return redirect(reverse('guides.views.matcher_index'))
+        elif request.POST.get("cancel"):
+            match.delete()
+            return redirect(reverse('guides.views.matcher_index'))
+        else:
+            pass
+
+    form = MatchEmailForm(match = match) 
+    return render(request,'guides/send_match_email.html',dict(match=match, form=form))
 

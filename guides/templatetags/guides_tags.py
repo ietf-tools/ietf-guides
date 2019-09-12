@@ -11,7 +11,10 @@ def stalecheck(time):
     try:
         dt = datetime.datetime.strptime(time, "%Y/%m/%d")
     except ValueError:
-        return mark_safe('<span class="alert alert-danger">unparsable</span>')
+        try:
+            dt = datetime.datetime.strptime(time, "%Y-%m-%d")
+        except:
+            return mark_safe('<span class="alert alert-danger">unparsable</span>')
 
     days = abs ( (datetime.datetime.now() - dt).days )
     if days > 60:

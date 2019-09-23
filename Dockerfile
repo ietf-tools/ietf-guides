@@ -1,5 +1,7 @@
 FROM opensuse/leap
 
+ENV LANG en_US.UTF-8
+
 RUN zypper -n update
 
 RUN zypper -n install \
@@ -45,6 +47,8 @@ RUN chown wwwrun:www /code/logs
 
 RUN mkdir /code/static
 RUN chown wwwrun:www /code/static
+
+ENV DJANGO_SETTINGS_MODULE=ietf_guides.settings.prod
 
 ENTRYPOINT ./docker-entry.sh
 

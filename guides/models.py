@@ -101,6 +101,7 @@ class Participant(models.Model):
     areas = models.ManyToManyField(Area, verbose_name='What IETF area(s) most interest you?', help_text = 'Further information about IETF areas is available <a href="https://www.ietf.org/topics/areas/">here</a>.' )
     groups = models.CharField('Which working groups are you most interested in?',help_text='see <a href="https://www.ietf.org/how/wgs">https://www.ietf.org/how/wgs</a>',max_length=256)
     gender_pref = models.CharField('Guide gender preference', max_length=32, choices=GEND_CHOICES, default=GEND_NOPREF)
+    remote = models.CharField('Will you be attending remotely?', max_length=32, choices=YNM_CHOICES, default=YNM_NO)
     additional_info = models.TextField('Is there anything else you would like to share with us?', blank=True)
 
     def __str__(self):
@@ -129,6 +130,7 @@ class Guide(models.Model):
     areas = models.ManyToManyField(Area, verbose_name='What IETF area(s) are you involved in?')
     groups = models.CharField('Which working groups are you most able to help people with?', max_length=256, default="", blank=True)
     arrival_date = models.CharField('What date are you arriving at the next IETF meeting (YYYY/MM/DD)?', max_length=64)
+    accept_remote = models.CharField('Are you willing to guide remote participants?',max_length=32, choices=YNM_CHOICES, default=YNM_YES)
     additional_info = models.TextField('Is there anything else we should know?',
                                        blank=True)
     keep_for_nexttime = models.BooleanField("Should we keep your registration data around for future participation in the guides program?", default=False)

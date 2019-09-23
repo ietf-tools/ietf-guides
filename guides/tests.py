@@ -87,7 +87,8 @@ class GuidesTests(TestCase):
                 give_intro=YNM_YES,
                 areas=[2,5],
                 groups='blarg, burgle, baz',
-                arrival_date="2019-03-15"   ,
+                arrival_date="2019-03-15",
+                accept_remote="NO",
                 additional_info="Nope.",               
             )
         )
@@ -112,6 +113,7 @@ class GuidesTests(TestCase):
                 areas=[1,3],
                 groups='anything+contining+"bis"',
                 gender_pref=GEND_NOPREF,
+                remote="YES",
                 additional_info="peace",
             )
         )

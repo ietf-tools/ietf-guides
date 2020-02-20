@@ -18,6 +18,7 @@ def forward(apps, schema_editor):
         Area.objects.create(area=area)
 
 def reverse(apps, schema_editor):
+    Area = apps.get_model('guides','Area')
     Area.objects.all().delete()
 
 class Migration(migrations.Migration):

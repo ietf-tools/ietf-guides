@@ -1,14 +1,21 @@
 FROM opensuse/leap
 
+ENV LANG en_US.UTF-8
+
 RUN zypper -n update
 
 RUN zypper -n install \
         apache2 \
         apache2-devel \
+        bind-utils \
         command-not-found \
+        coreutils \
+        findutils \
         gcc \
         gcc-c++ \
+        iputils \
         less \
+        lftp \
         libmysqlclient-devel\
         mysql-client \
         net-tools \
@@ -17,6 +24,7 @@ RUN zypper -n install \
         python3-devel \
         python3-mysqlclient \
         python3-pip \
+        rsync\
         sqlite3 \
         sudo \
         vim
@@ -39,6 +47,8 @@ RUN chown wwwrun:www /code/logs
 
 RUN mkdir /code/static
 RUN chown wwwrun:www /code/static
+
+ENV DJANGO_SETTINGS_MODULE=ietf_guides.settings.prod
 
 ENTRYPOINT ./docker-entry.sh
 

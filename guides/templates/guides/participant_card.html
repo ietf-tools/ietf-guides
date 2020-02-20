@@ -18,6 +18,7 @@
       <div>Areas: {% for area in participant.areas.all %}{{ area.short }} {% endfor %}</div>
       <div>Groups: {{ participant.groups }}</div>
       <div>Guide gender: {{ participant.gender_pref }}</div>
+      <div>Remote: {{ participant.remote }}</div>
       <div>Other: {{ participant.additional_info }}</div>
     </div>
   </div>

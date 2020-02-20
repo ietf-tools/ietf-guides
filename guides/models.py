@@ -80,13 +80,13 @@ class Area(models.Model):
     area = models.CharField(max_length=64)
     short = models.CharField(max_length=12,default="")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.area
 
 class Language(models.Model):
     language = models.CharField(max_length=32)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.language
 
 class Participant(models.Model):
@@ -101,9 +101,10 @@ class Participant(models.Model):
     areas = models.ManyToManyField(Area, verbose_name='What IETF area(s) most interest you?', help_text = 'Further information about IETF areas is available <a href="https://www.ietf.org/topics/areas/">here</a>.' )
     groups = models.CharField('Which working groups are you most interested in?',help_text='see <a href="https://www.ietf.org/how/wgs">https://www.ietf.org/how/wgs</a>',max_length=256)
     gender_pref = models.CharField('Guide gender preference', max_length=32, choices=GEND_CHOICES, default=GEND_NOPREF)
+    remote = models.CharField('Will you be attending remotely?', max_length=32, choices=YNM_CHOICES, default=YNM_NO)
     additional_info = models.TextField('Is there anything else you would like to share with us?', blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s <%s>" % (self.given_name, self.surname, self.email)
 
     def pretty_attend(self):
@@ -129,11 +130,12 @@ class Guide(models.Model):
     areas = models.ManyToManyField(Area, verbose_name='What IETF area(s) are you involved in?')
     groups = models.CharField('Which working groups are you most able to help people with?', max_length=256, default="", blank=True)
     arrival_date = models.CharField('What date are you arriving at the next IETF meeting (YYYY/MM/DD)?', max_length=64)
+    accept_remote = models.CharField('Are you willing to guide remote participants?',max_length=32, choices=YNM_CHOICES, default=YNM_YES)
     additional_info = models.TextField('Is there anything else we should know?',
                                        blank=True)
     keep_for_nexttime = models.BooleanField("Should we keep your registration data around for future participation in the guides program?", default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s <%s>" % (self.given_name, self.surname, self.email)
 
     def pretty_ietf_years(self):
@@ -151,5 +153,5 @@ class Match(models.Model):
     by = models.ForeignKey(User)
     date = models.DateTimeField(auto_now=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s is guiding %s (made by %s on %s)" % (self.guide, self.participant, self.by.email, self.date)

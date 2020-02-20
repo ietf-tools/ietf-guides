@@ -87,7 +87,8 @@ class GuidesTests(TestCase):
                 give_intro=YNM_YES,
                 areas=[2,5],
                 groups='blarg, burgle, baz',
-                arrival_date="2019-03-15"   ,
+                arrival_date="2019-03-15",
+                accept_remote="NO",
                 additional_info="Nope.",               
             )
         )
@@ -112,6 +113,7 @@ class GuidesTests(TestCase):
                 areas=[1,3],
                 groups='anything+contining+"bis"',
                 gender_pref=GEND_NOPREF,
+                remote="YES",
                 additional_info="peace",
             )
         )
@@ -127,7 +129,7 @@ class GuidesTests(TestCase):
         r = self.client.get(url)
         self.assertEqual(r.status_code, 302)
         self.assertTrue(r.url.startswith(reverse('login')))
-        logged_in = self.client.login(username='testuser', password='password')
+        self.client.login(username='testuser', password='password')
         r = self.client.get(url)
         self.assertEqual(r.status_code, 200)
 
@@ -143,10 +145,19 @@ class GuidesTests(TestCase):
         r = self.client.get(url)
         self.assertEqual(r.status_code, 302)
         self.assertTrue(r.url.startswith(reverse('login')))
-        logged_in = self.client.login(username='testuser', password='password')
+        self.client.login(username='testuser', password='password')
         r = self.client.get(url)
         self.assertEqual(r.status_code, 200)
-        r = self.client.post(url,dict(message="Override all the messages"))
+        r = self.client.post(url,dict(send="send", message="Override all the messages"))
         self.assertEqual(r.status_code, 302)
         self.assertEqual(len(mail.outbox),1)
         self.assertEqual(mail.outbox[0].body,"Override all the messages")
+
+    def test_cancel_match(self):
+        match = MatchFactory(by=self.user)
+        url = reverse('guides.views.send_match_email', kwargs=dict(match_id=match.pk))
+        self.client.login(username='testuser', password='password')
+        r = self.client.post(url,dict(cancel="cancel", message="Override all the messages"))
+        self.assertEqual(r.status_code, 302)
+        self.assertEqual(len(mail.outbox),0)
+        self.assertFalse(Match.objects.filter(pk=match.pk).exists())

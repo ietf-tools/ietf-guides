@@ -27,8 +27,7 @@ The IETF guides program aims to have three parts:
 It would be great if you could meet early in the week and discuss
 questions, interests, and 'how-to-get-things-done' in the IETF,
 and perhaps have a follow-up during the week to check-in whether
-there are any questions.  Hopefully you'll both have the chance
-to attend the welcome reception on Sunday at 17:00.
+there are any questions.
 
 You both have the responsibility to make meetings between you happen,
 but it would be great if the guide would take the lead in setting up

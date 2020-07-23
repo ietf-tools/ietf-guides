@@ -61,7 +61,7 @@ Specific questions about your favorite topics of interest are wise to
 discuss such as: relevant working groups or research groups, relevant
 authors, working group chairs and area directors.  You might want to
 discuss trending issues in the upcoming meetings (also check the ISOC
-"rough guides" in the IETF journal)
+"rough guides" in the IETF journal).
 
 Note that some guides have graciously agreed to help more than one
 newcomer to the IETF.  Your assigned guide may request to schedule

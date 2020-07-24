@@ -1,4 +1,4 @@
-Django>=1.11,<1.12
+Django>=2,<3
 django-bootstrap3>=11.0.0
 hashids>=1.2.0
 pyquery>=1.2.13,!=1.2.14

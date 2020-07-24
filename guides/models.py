@@ -100,7 +100,7 @@ class Participant(models.Model):
     surname = models.CharField(max_length=64)
     affiliation = models.CharField(max_length=64)
     country = models.CharField('Country of residence',max_length=64)
-    language = models.ForeignKey(Language,verbose_name='Preferred conversational language',max_length=32,default=1)
+    language = models.ForeignKey(Language,verbose_name='Preferred conversational language',max_length=32,default=1,on_delete=models.CASCADE)
     attend = models.CharField('Number of IETFs attended',max_length=32, choices=ATTEND_CHOICES, default=ATTEND_NONE)
     topics = models.TextField('What technical topics brought you to the IETF?')
     areas = models.ManyToManyField(Area, verbose_name='What IETF area(s) most interest you?', help_text = 'Further information about IETF areas is available <a href="https://www.ietf.org/topics/areas/">here</a>.' )
@@ -153,9 +153,9 @@ class Guide(models.Model):
 
 
 class Match(models.Model):
-    participant = models.ForeignKey(Participant)
-    guide = models.ForeignKey(Guide)
-    by = models.ForeignKey(User)
+    participant = models.ForeignKey(Participant,on_delete=models.CASCADE)
+    guide = models.ForeignKey(Guide,on_delete=models.CASCADE)
+    by = models.ForeignKey(User,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now=True)
 
     def __str__(self):

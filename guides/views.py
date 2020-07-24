@@ -15,7 +15,7 @@ from .forms import EmailForm, GuideForm, ParticipantForm, MatchForm, MatchEmailF
 
 
 def index(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect('guides.views.matcher_index')
     else:
         return render(request, 'guides/index.html', {})

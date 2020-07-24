@@ -16,12 +16,12 @@ class ParticipantFactory(factory.DjangoModelFactory):
     class Meta:
         model = Participant
 
-    email = factory.Sequence(lambda n: 'guide{0}@example.com'.format(n))
+    email = factory.Sequence(lambda n: 'participant{0}@example.com'.format(n))
     given_name = factory.Faker('first_name')
     surname = factory.Faker('last_name')
     affiliation = factory.Faker('company')
     country = factory.Faker('country')
-    language = factory.fuzzy.FuzzyChoice(Language.objects.all())
+    language = factory.fuzzy.FuzzyChoice(list(Language.objects.all()))
     attend = factory.fuzzy.FuzzyChoice([ATTEND_NONE,ATTEND_ONE, ATTEND_TWO, ATTEND_THREE])
     topics = factory.Faker('bs')
     groups = factory.fuzzy.FuzzyChoice(['stir', 'saag', 'iotrg',])
@@ -98,4 +98,6 @@ class AreaFactory(factory.DjangoModelFactory):
         model = Area
 
     area = factory.Faker('word')
-    short = factory.Faker('word')
+
+
+    short = factory.LazyFunction(lambda: factory.Faker('word').generate()[:12])

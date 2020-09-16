@@ -21,7 +21,7 @@ class ParticipantFactory(factory.DjangoModelFactory):
     surname = factory.Faker('last_name')
     affiliation = factory.Faker('company')
     country = factory.Faker('country')
-    language = factory.fuzzy.FuzzyChoice(list(Language.objects.all()))
+    language = factory.SubFactory('guides.factories.LanguageFactory')
     attend = factory.fuzzy.FuzzyChoice([ATTEND_NONE,ATTEND_ONE, ATTEND_TWO, ATTEND_THREE])
     topics = factory.Faker('bs')
     groups = factory.fuzzy.FuzzyChoice(['stir', 'saag', 'iotrg',])

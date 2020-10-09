@@ -9,5 +9,8 @@ urlpatterns = [
     url(r'request_guide$', views.request_guide, name='guides.views.request_guide'),
     url(r'edit_info/(?P<hash>[\w]+)$', views.edit_info, name='guides.views.edit_info'),
     url(r'make_match$', views.make_match, name='guides.views.make_match'),
-    url(r'send_match_email/(?P<match_id>[\d]+)$', views.send_match_email, name='guides.views.send_match_email')
+    url(r'send_match_email/(?P<match_id>[\d]+)$', views.send_match_email, name='guides.views.send_match_email'),
+    url(r'close', views.close_registration, name='guides.views.close_registration'),
+    url(r'open', views.open_registration, name='guides.views.open_registration'),
+    url(r'full', views.full_registration, name='guides.views.full_registration'),
 ]

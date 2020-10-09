@@ -9,7 +9,7 @@ from django.core import mail
 from django.contrib.auth.models import User
 
 from .utils import encode_email
-from .models import Guide, Participant, Match, Language, YEARS_MORETHANTEN, YNM_YES, ATTEND_TWO, ATTEND_THREE, GEND_NOPREF
+from .models import Guide, Participant, Match, Language, YEARS_MORETHANTEN, YNM_YES, ATTEND_TWO, ATTEND_THREE, GEND_NOPREF, RegistrationState, REGISTRATION_CLOSED, REGISTRATION_FULL
 from .factories import GuideFactory, ParticipantFactory, MatchFactory, LanguageFactory, AreaFactory
 
 class GuidesTests(TestCase):
@@ -19,17 +19,47 @@ class GuidesTests(TestCase):
         LanguageFactory.create_batch(10)
         AreaFactory.create_batch(8)
 
+    def switch_system_state(self, to_what):
+        url = reverse('guides.views.index', kwargs=dict())
+        logged_in = self.client.login(username='testuser', password='password')
+        r = self.client.get(url + "/" + to_what)
+        self.assertEqual(r.status_code, 302)
+        self.client.logout()
+
     def test_index(self):
         url = reverse('guides.views.index', kwargs=dict())
         r = self.client.get(url)
         self.assertEqual(r.status_code, 200)
 
+        # open
+        self.switch_system_state("open")
+        r = self.client.get(url)
+        self.assertEqual(r.status_code, 200)
+        self.assertIn("matches experienced", r.content.decode())  # about
+        self.assertIn("If you are a newcomer", r.content.decode())
+
+        # closed
+        self.switch_system_state("close")
+        r = self.client.get(url)
+        self.assertEqual(r.status_code, 200)
+        self.assertIn("matches experienced", r.content.decode())  # about
+        self.assertIn("currently closed", r.content.decode())  # closed
+
+        # full
+        self.switch_system_state("full")
+        r = self.client.get(url)
+        self.assertEqual(r.status_code, 200)
+        self.assertIn("matches experienced", r.content.decode())  # about
+        self.assertIn("currently full", r.content.decode())  # full
+
+        # logged in management page
         logged_in = self.client.login(username='testuser',password='password')
         self.assertTrue(logged_in)
         r = self.client.get(url)
         self.assertEqual(r.status_code, 302)
         r = self.client.get(r.url)
         self.assertEqual(r.status_code, 200)
+
 
 
     def test_become_guide(self):

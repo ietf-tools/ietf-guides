@@ -16,7 +16,7 @@ from .forms import EmailForm, GuideForm, ParticipantForm, MatchForm, MatchEmailF
 
 
 def set_registration(to_what):
-    if RegistrationState.objects.count == 0:
+    if RegistrationState.objects.count() == 0:
         registration_state = RegistrationState()
         registration_state.save()
 
@@ -27,8 +27,8 @@ def set_registration(to_what):
 
 
 def get_registration_state():
-    if RegistrationState.objects.count == 0:
-        set_registration(REGISTRATION_OPEN)
+    if RegistrationState.objects.count() == 0:
+        return set_registration(REGISTRATION_OPEN)
     return RegistrationState.objects.first().system_state
 
 

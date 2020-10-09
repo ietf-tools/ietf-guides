@@ -81,6 +81,16 @@ IETF_AREAS = (
     (AREA_UNKNOWN, "I don't know yet")
 )
 
+REGISTRATION_OPEN = "OPEN"
+REGISTRATION_CLOSED = "CLOSED"
+REGISTRATION_FULL = "FULL"
+
+REGISTRATION_STATES = (
+    (REGISTRATION_OPEN, "Registration is open"),
+    (REGISTRATION_CLOSED, "Registration is closed"),
+    (REGISTRATION_FULL, "Registration is full"),
+)
+
 class Area(models.Model):
     area = models.CharField(max_length=64)
     short = models.CharField(max_length=12,default="")
@@ -160,3 +170,10 @@ class Match(models.Model):
 
     def __str__(self):
         return "%s is guiding %s (made by %s on %s)" % (self.guide, self.participant, self.by.email, self.date)
+
+class RegistrationState(models.Model):
+    system_state = models.CharField('Registration State', max_length=32,
+                                    choices=REGISTRATION_STATES,
+                                    default=REGISTRATION_OPEN)
+    def __str__(self):
+        return self.system_state

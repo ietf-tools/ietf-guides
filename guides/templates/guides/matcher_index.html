@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 {% block title %}IETF Guides - Matchers{% endblock %}
 {% block content %}
-<h1>IETF Guides Program</h1>
 <div class="float-right"><a href="{% url 'logout' %}" class="btn btn-secondary">Logout</a></div>
-<h2>Matchers</h2>
+<h1>IETF Guides Program</h1>
+
+<h4>System Status: {{system_status}}</h4>
+<p style="margin-left: 2em;">Set system status to:
+    <a href="{% url 'guides.views.open_registration' %}" class="btn btn-success">Open</a>
+    <a href="{% url 'guides.views.close_registration' %}" class="btn btn-danger">Closed</a>
+    <a href="{% url 'guides.views.full_registration' %}" class="btn btn-warning">Full</a>
+    </p>
+<h2>Matches</h2>
   <div>
     <a href="{% url 'guides.views.make_match' %}" class="btn btn-primary">Make Matches</a>
   </div>

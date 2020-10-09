@@ -9,16 +9,59 @@ from django.http import Http404
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 
-from .models import Guide, Participant, Match
+from .models import Guide, Participant, Match, RegistrationState
+from .models import REGISTRATION_OPEN, REGISTRATION_FULL, REGISTRATION_CLOSED
 from .utils import encode_email, decode_hash
 from .forms import EmailForm, GuideForm, ParticipantForm, MatchForm, MatchEmailForm
 
 
+def set_registration(to_what):
+    if RegistrationState.objects.count == 0:
+        registration_state = RegistrationState()
+        registration_state.save()
+
+    inst = RegistrationState.objects.first()
+    inst.system_state = to_what
+    inst.save()
+    return inst.system_state
+
+
+def get_registration_state():
+    if RegistrationState.objects.count == 0:
+        set_registration(REGISTRATION_OPEN)
+    return RegistrationState.objects.first().system_state
+
+
 def index(request):
+    registration_state = get_registration_state()
+
     if request.user.is_authenticated:
         return redirect('guides.views.matcher_index')
-    else:
+    elif registration_state == REGISTRATION_OPEN:
         return render(request, 'guides/index.html', {})
+    elif registration_state == REGISTRATION_FULL:
+        return render(request, 'guides/registration_full.html', {})
+    else:  # default closed
+        return render(request, 'guides/registration_closed.html', {})
+
+
+@login_required
+def close_registration(request):
+    set_registration(REGISTRATION_CLOSED)
+    return redirect('guides.views.index')
+
+
+@login_required
+def open_registration(request):
+    set_registration(REGISTRATION_OPEN)
+    return redirect('guides.views.index')
+
+
+@login_required
+def full_registration(request):
+    set_registration(REGISTRATION_FULL)
+    return redirect('guides.views.index')
+
 
 @login_required
 def matcher_index(request):

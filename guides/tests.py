@@ -103,6 +103,7 @@ class GuidesTests(TestCase):
         self.assertEqual(r.status_code,200)
         r = self.client.post(url, 
             dict(
+                attending="YES",
                 given_name="Random",
                 surname="Participant",
                 affiliation="DoNotHave",

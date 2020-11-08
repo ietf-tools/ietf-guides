@@ -96,9 +96,9 @@ class Language(models.Model):
 
 class Participant(models.Model):
     email = models.EmailField(primary_key=True)
-    disabled = models.CharField('Will you be attending the next IETF?',
-                                max_length=32, choices=YN_CHOICES,
-                                default=YNM_NO)
+    attending = models.CharField('Will you be attending the next IETF?',
+                                 max_length=32, choices=YN_CHOICES,
+                                 default=YNM_NO)
     remote = models.CharField('Will you be attending remotely?', max_length=32, choices=YN_CHOICES, default=YNM_NO)
     given_name = models.CharField(max_length=64)
     surname = models.CharField(max_length=64)

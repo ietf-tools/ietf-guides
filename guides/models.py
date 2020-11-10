@@ -96,6 +96,10 @@ class Language(models.Model):
 
 class Participant(models.Model):
     email = models.EmailField(primary_key=True)
+    attending = models.CharField('Will you be attending the next IETF?',
+                                 max_length=32, choices=YN_CHOICES,
+                                 default=YNM_NO)
+    remote = models.CharField('Will you be attending remotely?', max_length=32, choices=YN_CHOICES, default=YNM_NO)
     given_name = models.CharField(max_length=64)
     surname = models.CharField(max_length=64)
     affiliation = models.CharField(max_length=64)
@@ -106,7 +110,6 @@ class Participant(models.Model):
     areas = models.ManyToManyField(Area, verbose_name='What IETF area(s) most interest you?', help_text = 'Further information about IETF areas is available <a href="https://www.ietf.org/topics/areas/">here</a>.' )
     groups = models.CharField('Which working groups are you most interested in?',help_text='see <a href="https://www.ietf.org/how/wgs">https://www.ietf.org/how/wgs</a>',max_length=256)
     gender_pref = models.CharField('Guide gender preference', max_length=32, choices=GEND_CHOICES, default=GEND_NOPREF)
-    remote = models.CharField('Will you be attending remotely?', max_length=32, choices=YN_CHOICES, default=YNM_NO)
     additional_info = models.TextField('Is there anything else you would like to share with us?', blank=True)
 
     def __str__(self):

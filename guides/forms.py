@@ -1,7 +1,8 @@
 from django import forms
 
-from .models import Guide, Participant, Match
+from .models import Guide, Participant, Match, YNM_YES
 from django.template.loader import render_to_string
+from django.db.models import Q
 
 
 class EmailForm(forms.Form):
@@ -14,7 +15,9 @@ ParticipantForm = forms.modelform_factory(Participant,exclude=['email',], widget
 class MatchForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(MatchForm, self).__init__(*args, **kwargs)
-        self.fields['participant'].queryset = Participant.objects.filter(match__isnull=True)
+        self.fields['participant'].queryset = \
+            Participant.objects.filter(Q(match__isnull=True,
+                                         match__attending=YNM_YES))
 
     class Meta:
         model = Match

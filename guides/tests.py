@@ -126,6 +126,8 @@ class GuidesTests(TestCase):
     def test_make_match(self):
         guide = GuideFactory()
         participant=ParticipantFactory()
+        participant.attending = YNM_YES
+        participant.save()
         url = reverse('guides.views.make_match')
         r = self.client.get(url)
         self.assertEqual(r.status_code, 302)

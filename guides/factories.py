@@ -8,7 +8,8 @@ from itertools import combinations
 from guides.models import Guide, Participant, Match, Language, Area,\
     GEND_NOPREF, GEND_MALE, GEND_FEMALE, \
     ATTEND_NONE, ATTEND_ONE, ATTEND_TWO, ATTEND_THREE, \
-    YEARS_LESSTHANFIVE, YEARS_FIVETOTEN, YEARS_MORETHANTEN
+    YEARS_LESSTHANFIVE, YEARS_FIVETOTEN, YEARS_MORETHANTEN, \
+    YNM_NO, YNM_YES
 
 
 
@@ -27,6 +28,7 @@ class ParticipantFactory(factory.DjangoModelFactory):
     groups = factory.fuzzy.FuzzyChoice(['stir', 'saag', 'iotrg',])
     gender_pref = factory.fuzzy.FuzzyChoice([GEND_NOPREF,GEND_MALE,GEND_FEMALE])
     additional_info = factory.Faker('bs')
+    attending = factory.fuzzy.FuzzyChoice([YNM_NO, YNM_YES])
 
     @factory.post_generation
     def areas(self, create, extracted, **kwargs):

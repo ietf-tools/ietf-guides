@@ -28,7 +28,8 @@ def matcher_index(request):
     stats['matches'] = Match.objects.count()
     stats['unmatched'] = Participant.objects.exclude(match__isnull=False).count()
     stats['guides_unused'] = Guide.objects.exclude(match__isnull=False).count()
-    stats['guides_matched_but_willing'] = Guide.objects.filter(match__isnull=False,multiple_guided=True).count()
+    stats['guides_matched_but_willing'] = \
+        Guide.objects.filter(match__isnull=False).filter(multiple_guided=True).count()
     return render(request, 'guides/matcher_index.html',dict(stats=stats))
 
 def become_guide(request):

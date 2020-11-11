@@ -17,7 +17,7 @@ class MatchForm(forms.ModelForm):
         super(MatchForm, self).__init__(*args, **kwargs)
         self.fields['participant'].queryset = \
             Participant.objects.filter(Q(match__isnull=True,
-                                         match__attending=YNM_YES))
+                                         match__attending=YNM_NO))
 
     class Meta:
         model = Match

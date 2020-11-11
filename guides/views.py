@@ -9,7 +9,7 @@ from django.http import Http404
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 
-from .models import Guide, Participant, Match
+from .models import Guide, Participant, Match, YNM_YES
 from .utils import encode_email, decode_hash
 from .forms import EmailForm, GuideForm, ParticipantForm, MatchForm, MatchEmailForm
 
@@ -26,7 +26,7 @@ def matcher_index(request):
     stats['participants'] = Participant.objects.count()
     stats['guides'] = Guide.objects.count()
     stats['matches'] = Match.objects.count()
-    stats['unmatched'] = Participant.objects.exclude(match__isnull=False).count()
+    stats['unmatched'] = Participant.objects.exclude(match__isnull=False, attending=YNM_YES).count()
     stats['guides_unused'] = Guide.objects.exclude(match__isnull=False).count()
     stats['guides_matched_but_willing'] = \
         Guide.objects.filter(match__isnull=False, multiple_guided=YNM_YES).count()

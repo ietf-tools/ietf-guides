@@ -24,10 +24,10 @@ The IETF guides program aims to have three parts:
 1. (virtual) face to face meeting at the beginning of the meeting
 2. (virtual) check-in during the week.
 
-It would be great if you could meet early in the week and discuss
-questions, interests, and 'how-to-get-things-done' in the IETF,
-and perhaps have a follow-up during the week to check-in whether
-there are any questions.
+It would be great if you could meet before the week or early in the
+week and discuss questions, interests, and 'how-to-get-things-done' in
+the IETF, and perhaps have a follow-up during the week to check-in
+whether there are any questions.
 
 You both have the responsibility to make meetings between you happen,
 but it would be great if the guide would take the lead in setting up
@@ -35,7 +35,6 @@ the first meeting.  We suggest the following potential mechanisms for
 meeting up virtually:
 
 1. ietf.gather.town -- the IETF virtual "hallway" meeting spot
-   (look for the link in the IETF quick-connections agenda slot)
 2. E-Mail of course!
 3. Jabber -- the IETF standardized chat protocol
 4. Slack -- ietf.slack.org

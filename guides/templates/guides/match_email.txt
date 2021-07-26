@@ -1,6 +1,6 @@
 Dear {{match.participant.given_name}} and {{match.guide.given_name}},
 
-Welcome to the guides programme! In this programme we aim to
+Welcome to the guides program! In this program we aim to
 facilitate knowledge transfer between experienced IETF-ers and new
 participants in the community. The IETF is not your typical
 organization so some help along the way might help you make your
@@ -38,7 +38,7 @@ meeting up virtually:
    (look for the link in the IETF quick-connections agenda slot)
 2. E-Mail of course!
 3. Jabber -- the IETF standardized chat protocol
-4. Slack -- ietf.slack.org
+4. Slack -- ietf.slack.com
 5. A conferencing system of your choosing (google meet, zoom, etc)
 6. Even the good old fashioned telephone
 

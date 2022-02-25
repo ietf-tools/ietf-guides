@@ -16,6 +16,8 @@ class MatchForm(forms.ModelForm):
         super(MatchForm, self).__init__(*args, **kwargs)
         self.fields['participant'].queryset = \
             Participant.objects.filter(match__isnull=True).filter(attending=YNM_YES)
+        self.fields['guide'].queryset = \
+            Guide.objects.order_by('arrival_date').reverse()
 
     class Meta:
         model = Match

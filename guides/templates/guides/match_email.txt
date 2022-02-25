@@ -21,26 +21,35 @@ interest in:
 The IETF guides program aims to have three parts: 
 
 0. Introduction conversations before the meeting
-1. (virtual) face to face meeting at the beginning of the meeting
-2. (virtual) check-in during the week.
+1. (potentially virtual) face to face meeting at the beginning of the meeting
+2. (potentially virtual) check-in during the week.
 
-It would be great if you could meet early in the week and discuss
-questions, interests, and 'how-to-get-things-done' in the IETF,
-and perhaps have a follow-up during the week to check-in whether
+It would be great if you could meet early in or before the week and
+discuss questions, interests, and 'how-to-get-things-done' in the
+IETF, and perhaps have a follow-up during the week to check-in whether
 there are any questions.
 
 You both have the responsibility to make meetings between you happen,
 but it would be great if the guide would take the lead in setting up
 the first meeting.  We suggest the following potential mechanisms for
-meeting up virtually:
+meeting up based on whether you are participating in person or
+remotely:
+
+In person:
+
+1. When checking in at the registration desk
+2. At the Sunday night reception
+3. During the weekend hackathon if you are both participating
+4. During the morning coffee break
+
+Virtually:
 
 1. ietf.gather.town -- the IETF virtual "hallway" meeting spot
    (look for the link in the IETF quick-connections agenda slot)
 2. E-Mail of course!
-3. Jabber -- the IETF standardized chat protocol
-4. Slack -- ietf.slack.org
-5. A conferencing system of your choosing (google meet, zoom, etc)
-6. Even the good old fashioned telephone
+3. Slack -- ietf.slack.org
+4. A conferencing system of your choosing (google meet, zoom, etc)
+5. Even the good old fashioned telephone
 
 As an IETF participant it would help if you follow your interests
 within the IETF: Ask the guide what you think you need to make the
@@ -72,6 +81,6 @@ interactions.  Please mail any questions you have to
 mentoring-coordinators@ietf.org.
 
 Cheers,
-Wes Hardaker, Barbara Stark and Paul Wouters
+Wes Hardaker and Paul Wouters
 IETF Guides Program Leads
 

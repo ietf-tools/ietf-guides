@@ -12,6 +12,7 @@
 
 - [Setup for a development environment](#setup-for-a-development-environment)
 - [Running a prebuilt image under docker](#running-a-prebuilt-image-under-docker)
+- [Dummy Data](#dummy-data)
 - [Contributing](https://github.com/ietf-tools/.github/blob/main/CONTRIBUTING.md)
 
 ---
@@ -71,5 +72,5 @@ docker run -it -v ${PWD}/logs:/code/logs -v ${PWD}/secrets/local.py:/code/ietf_g
 ```
 The website will then be exposed at http://localhost:8002
 
-### dummy data
+### Dummy data
 running `./manage.py make_dummy_data` will create ten guides and ten participants with field values populated by Faker.

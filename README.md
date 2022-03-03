@@ -4,6 +4,7 @@
     
 [![Release](https://img.shields.io/github/release/ietf-tools/ietf-guides.svg?style=flat&maxAge=600)](https://github.com/ietf-tools/ietf-guides/releases)
 [![License](https://img.shields.io/github/license/ietf-tools/ietf-guides)](https://github.com/ietf-tools/ietf-guides/blob/main/LICENSE)
+[![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-Docker%20Images-blue?logo=github)](https://github.com/ietf-tools/ietf-guides/pkgs/container/ietf-guides)
 <!-- [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/ietf-tools/ietf-guides) -->
     
 ##### A small django project to help match IETF guide program guides to participants

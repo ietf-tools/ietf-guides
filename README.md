@@ -64,12 +64,12 @@ DATABASES = {
 * create a `local.py` in that directory as above
 * start the most recent image from <https://cloud.docker.com/u/ietf/repository/docker/ietf/ietf_guides> mapping your `local.py` and possibly your database socket into the container using a command similar to:
 ```bash
-docker run -it -v ${PWD}/logs:/code/logs -v ${PWD}/local.py:/code/ietf_guides/settings/local.py -p 8002:8002 --name ietf_guides ietf/ietf_guides:v0.9.1
+docker run -it -v ${PWD}/logs:/code/logs -v ${PWD}/local.py:/code/ietf_guides/settings/local.py -p 8002:8002 --name ietf-guides ghcr.io/ietf-tools/ietf-guides:1.2.1
 ```
 or perhaps
 
 ```bash
-docker run -it -v ${PWD}/logs:/code/logs -v ${PWD}/secrets/local.py:/code/ietf_guides/settings/local.py -v /var/run/mysql:/var/run/mysql -p 8002:8002 --name ietf_guides ietf/ietf_guides:v0.9.1
+docker run -it -v ${PWD}/logs:/code/logs -v ${PWD}/secrets/local.py:/code/ietf_guides/settings/local.py -v /var/run/mysql:/var/run/mysql -p 8002:8002 --name ietf-guides ghcr.io/ietf-tools/ietf-guides:1.2.1
 ```
 The website will then be exposed at http://localhost:8002
 

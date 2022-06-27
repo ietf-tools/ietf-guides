@@ -81,6 +81,6 @@ interactions.  Please mail any questions you have to
 mentoring-coordinators@ietf.org.
 
 Cheers,
-Wes Hardaker and Paul Wouters
+Wes Hardaker, Paul Wouters, and Reese Enghardt 
 IETF Guides Program Leads
 

@@ -6,7 +6,7 @@ participants in the community. The IETF is not your typical
 organization so some help along the way might help you make your
 landing a bit smoother, so you will stay with us longer!
 
-It is my pleasure to introduce you to each
+It is our pleasure to introduce you to each
 other. {{match.guide.given_name}} has kindly offered to be
 {{match.participant.given_name}}'s guide for the upcoming IETF
 meeting. {{match.participant.given_name}} has expressed a specific
@@ -78,9 +78,9 @@ schedule.
 
 Please let us if there is any way in which we can support your
 interactions.  Please mail any questions you have to
-mentoring-coordinators@ietf.org.
+lead@guides.ietf.org.
 
 Cheers,
-Wes Hardaker and Paul Wouters
+Wes Hardaker, Paul Wouters, and Reese Enghardt 
 IETF Guides Program Leads
 

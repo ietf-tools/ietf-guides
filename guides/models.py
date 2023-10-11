@@ -71,6 +71,17 @@ AREA_SEC = "SEC"
 AREA_TSG = "TSG"
 AREA_UNKNOWN = "UNKNOWN"
 
+# note: these intentionally sort with NO being last
+HELP_NO = "ZERO"
+HELP_ONE = "ONE"
+HELP_ALWAYS = "ALWAYS"
+
+HELP_CHOICES = (
+    (HELP_NO, "Not at this time"),
+    (HELP_ONE, "This IETF (only)"),
+    (HELP_ALWAYS, "At every IETF I attend"),
+)
+
 IETF_AREAS = (
     (AREA_ART, "Applications and Real-Time"),
     (AREA_INT, "Internet"),
@@ -137,10 +148,10 @@ class Guide(models.Model):
     give_intro = models.CharField('Are you willing to give a general introduction of the IETF to a newcomer program participant?', max_length=32, choices=YNM_CHOICES, default=YNM_YES, help_text="<em>(Sometimes it is not possible to exactly match guides with participants and their preferred technical areas)</em>")
     areas = models.ManyToManyField(Area, verbose_name='What IETF area(s) are you involved in?')
     groups = models.CharField('Which working groups are you most able to help people with?', max_length=256, default="", blank=True)
-    arrival_date = models.CharField('What date are you arriving at the next IETF meeting (YYYY/MM/DD)?', max_length=64)
     accept_remote = models.CharField('Are you willing to guide remote participants?',max_length=32, choices=YNM_CHOICES, default=YNM_YES)
     additional_info = models.TextField('Is there anything else we should know?',
                                        blank=True)
+    help_frequency = models.CharField("How frequently are you willing to be a guide?", max_length=32, choices=HELP_CHOICES, default=HELP_NO)
     keep_for_nexttime = models.BooleanField("Should we keep your registration data around for future participation in the guides program?", default=False)
 
     def __str__(self):

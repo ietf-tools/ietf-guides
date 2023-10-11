@@ -9,7 +9,7 @@ from guides.models import Guide, Participant, Match, Language, Area,\
     GEND_NOPREF, GEND_MALE, GEND_FEMALE, \
     ATTEND_NONE, ATTEND_ONE, ATTEND_TWO, ATTEND_THREE, \
     YEARS_LESSTHANFIVE, YEARS_FIVETOTEN, YEARS_MORETHANTEN, \
-    YNM_NO, YNM_YES
+    YNM_NO, YNM_YES, HELP_NO, HELP_ONE, HELP_ALWAYS
 
 
 
@@ -54,7 +54,7 @@ class GuideFactory(factory.DjangoModelFactory):
     country = factory.Faker('country')
     ietf_years = factory.fuzzy.FuzzyChoice([YEARS_LESSTHANFIVE, YEARS_FIVETOTEN, YEARS_MORETHANTEN])
     groups = factory.fuzzy.FuzzyChoice(['stir', 'saag', 'iotrg',])
-    arrival_date = factory.Faker('date')
+    help_frequency = factory.fuzzy.FuzzyChoice([HELP_NO, HELP_YES, HELP_ALWAYS])
     additional_info = factory.Faker('bs')
 
     @factory.post_generation

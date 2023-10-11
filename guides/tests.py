@@ -87,7 +87,7 @@ class GuidesTests(TestCase):
                 give_intro=YNM_YES,
                 areas=[2,5],
                 groups='blarg, burgle, baz',
-                arrival_date="2019-03-15",
+                help_frequency="ONE",
                 accept_remote="NO",
                 additional_info="Nope.",               
             )

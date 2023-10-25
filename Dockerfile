@@ -1,35 +1,20 @@
-FROM opensuse/leap
+FROM python:3.9-bullseye
+LABEL maintainer="IETF Tools Team <tools-discuss@ietf.org>"
 
-ENV LANG en_US.UTF-8
+# Update system packages
+RUN apt-get update \
+    && apt-get -qy upgrade \
+    && apt-get -y install --no-install-recommends apt-utils dialog locales 2>&1
 
-RUN zypper -n update
+# Set locale to en_US.UTF-8
+RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment && \
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
+    echo "LANG=en_US.UTF-8" > /etc/locale.conf && \
+    dpkg-reconfigure locales && \
+    locale-gen en_US.UTF-8 && \
+    update-locale LC_ALL en_US.UTF-8
 
-RUN zypper -n install \
-        apache2 \
-        apache2-devel \
-        bind-utils \
-        command-not-found \
-        coreutils \
-        findutils \
-        gcc \
-        gcc-c++ \
-        iputils \
-        less \
-        lftp \
-        libmysqlclient-devel\
-        mysql-client \
-        net-tools \
-        net-tools-deprecated \
-        python3 \
-        python3-devel \
-        python3-mysqlclient \
-        python3-pip \
-        rsync\
-        sqlite3 \
-        sudo \
-        vim
-
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 5
+RUN apt-get -y install mariadb-client nginx 2>&1
 
 EXPOSE 8002:8002
 
@@ -37,16 +22,14 @@ RUN mkdir /code
 WORKDIR /code
 
 # Doing this step before copying the whole codebase improves docker's ability to reuse cached layers at build time
-COPY --chown=wwwrun:www ./requirements.txt /code/requirements.txt
+COPY ./requirements.txt /code/requirements.txt
 RUN pip install -r requirements.txt
 
-COPY --chown=wwwrun:www . /code/
+COPY . /code/
 
 RUN mkdir /code/logs
-RUN chown wwwrun:www /code/logs
 
 RUN mkdir /code/static
-RUN chown wwwrun:www /code/static
 
 ENV DJANGO_SETTINGS_MODULE=ietf_guides.settings.prod
 

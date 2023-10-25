@@ -1,6 +1,7 @@
-Django>=2,<3
+Django>=4
 django-bootstrap3>=11.0.0
 hashids>=1.2.0
 pyquery>=1.2.13,!=1.2.14
 factory_boy>=2.11,<3
-mod_wsgi>=4.6
+gunicorn>=20.1.0
+mysqlclient>=2

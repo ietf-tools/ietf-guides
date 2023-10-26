@@ -10,8 +10,8 @@ fi
 
 export DJANGO_SETTINGS_MODULE=ietf_guides.settings.prod
 
-/code/manage.py collectstatic
-/code/manage.py migrate
+/code/manage.py collectstatic --noinput
+/code/manage.py migrate --noinput
 
 cp /code/nginx/default /etc/nginx/sites-enabled/default
 nginx

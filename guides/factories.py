@@ -54,7 +54,7 @@ class GuideFactory(factory.DjangoModelFactory):
     country = factory.Faker('country')
     ietf_years = factory.fuzzy.FuzzyChoice([YEARS_LESSTHANFIVE, YEARS_FIVETOTEN, YEARS_MORETHANTEN])
     groups = factory.fuzzy.FuzzyChoice(['stir', 'saag', 'iotrg',])
-    help_frequency = factory.fuzzy.FuzzyChoice([HELP_NO, HELP_YES, HELP_ALWAYS])
+    help_frequency = factory.fuzzy.FuzzyChoice([HELP_NO, HELP_ONE, HELP_ALWAYS])
     additional_info = factory.Faker('bs')
 
     @factory.post_generation

@@ -1,11 +1,11 @@
-from django.conf.urls import include, url
+from django.urls import include, re_path
 from django.contrib import admin
 
 from guides.views import index as guides_index
 
 urlpatterns = [
-    url(r'^$', guides_index),
-    url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^guides/', include('guides.urls')),
+    re_path(r'^$', guides_index),
+    re_path(r'^admin/', admin.site.urls),
+    re_path(r'^accounts/', include('django.contrib.auth.urls')),
+    re_path(r'^guides/', include('guides.urls')),
 ]

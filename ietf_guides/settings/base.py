@@ -3,8 +3,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# TODO: See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
-
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -18,7 +16,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'guides.apps.GuidesConfig',
-    'mod_wsgi.server',
 ]
 
 MIDDLEWARE = [
@@ -50,9 +47,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ietf_guides.wsgi.application'
-
-# Password validation
-# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -95,5 +89,7 @@ LOGIN_REDIRECT_URL = '/'
 
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 from .local import *

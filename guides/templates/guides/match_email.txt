@@ -75,11 +75,14 @@ newcomer to the IETF.  Your assigned guide may request to schedule
 meetings with multiple newcomers in order to accommodate their time
 schedule.
 
-Please let us if there is any way in which we can support your
-interactions.  Please mail any questions you have to
+If either of you (both guide and participant) fail to contact each
+other by the end of the day Sunday, please mail lead@guides.ietf.org
+and let us know so we can make a different match when possible.
+Finally, please let us if there is any other way in which we can
+support your interactions.  Please mail any questions you have to
 lead@guides.ietf.org.
 
 Cheers,
-Wes Hardaker, Paul Wouters, and Reese Enghardt 
+Reese Enghardt, Wes Hardaker, and Paul Wouters
 IETF Guides Program Leads
 

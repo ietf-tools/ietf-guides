@@ -148,6 +148,7 @@ class Guide(models.Model):
     give_intro = models.CharField('Are you willing to give a general introduction of the IETF to a newcomer program participant?', max_length=32, choices=YNM_CHOICES, default=YNM_YES, help_text="<em>(Sometimes it is not possible to exactly match guides with participants and their preferred technical areas)</em>")
     areas = models.ManyToManyField(Area, verbose_name='What IETF area(s) are you involved in?')
     groups = models.CharField('Which working groups are you most able to help people with?', max_length=256, default="", blank=True)
+    remote = models.CharField('Will you be attending remotely?', max_length=32, choices=YN_CHOICES, default=YNM_MAYBE)
     accept_remote = models.CharField('Are you willing to guide remote participants?',max_length=32, choices=YNM_CHOICES, default=YNM_YES)
     additional_info = models.TextField('Is there anything else we should know?',
                                        blank=True)

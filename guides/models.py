@@ -122,6 +122,7 @@ class Participant(models.Model):
     groups = models.CharField('Which working groups are you most interested in?',help_text='see <a href="https://www.ietf.org/how/wgs">https://www.ietf.org/how/wgs</a>',max_length=256)
     gender_pref = models.CharField('Guide gender preference', max_length=32, choices=GEND_CHOICES, default=GEND_NOPREF)
     additional_info = models.TextField('Is there anything else you would like to share with us?', blank=True)
+    admin_notes = models.TextField('Administrative Only', blank=True)
 
     def __str__(self):
         return "%s %s <%s>" % (self.given_name, self.surname, self.email)
@@ -154,6 +155,7 @@ class Guide(models.Model):
                                        blank=True)
     help_frequency = models.CharField("How frequently are you willing to be a guide?", max_length=32, choices=HELP_CHOICES, default=HELP_NO)
     keep_for_nexttime = models.BooleanField("Should we keep your registration data around for future participation in the guides program?", default=False)
+    admin_notes = models.TextField('Administrative Only', blank=True)
 
     def __str__(self):
         return "%s %s <%s>" % (self.given_name, self.surname, self.email)

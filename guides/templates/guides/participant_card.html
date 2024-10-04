@@ -21,6 +21,9 @@
       <div>Guide gender: {{ participant.gender_pref }}</div>
       <div>Remote: {{ participant.remote }}</div>
       <div>Other: {{ participant.additional_info }}</div>
+      {% if participant.admin_notes %}
+      <div>Admin notes: {{ participant.admin_notes }}</div>
+      {% endif %}
     </div>
   </div>
 </div>

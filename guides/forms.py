@@ -7,9 +7,9 @@ from django.template.loader import render_to_string
 class EmailForm(forms.Form):
     email = forms.EmailField(label=u'Email address', required=True)
 
-GuideForm = forms.modelform_factory(Guide,exclude=['email',], widgets={'language':forms.CheckboxSelectMultiple(),'areas':forms.CheckboxSelectMultiple(),})
+GuideForm = forms.modelform_factory(Guide,exclude=['email','admin_notes'], widgets={'language':forms.CheckboxSelectMultiple(),'areas':forms.CheckboxSelectMultiple(),})
 
-ParticipantForm = forms.modelform_factory(Participant,exclude=['email',], widgets={'areas':forms.CheckboxSelectMultiple(),})
+ParticipantForm = forms.modelform_factory(Participant,exclude=['email','admin_notes'], widgets={'areas':forms.CheckboxSelectMultiple(),})
 
 class MatchForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

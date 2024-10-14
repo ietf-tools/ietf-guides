@@ -94,6 +94,7 @@ def edit_info(request, hash):
     template = 'guides/edit_info_guide.html' if request_type=='guide' else 'guides/edit_info_participant.html'
     if not form:
         form = formclass(instance=instance) if instance else formclass()
+
     return render(request, template, dict(email=email, form=form))
 
 @login_required

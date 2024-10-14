@@ -28,6 +28,13 @@ GEND_CHOICES = (
     (GEND_FEMALE, "I would prefer to work with a female guide"),
 )
 
+PARTICIPANT_GEND_CHOICES = (
+    (GEND_NOPREF, "I don't have a preference"),
+    (GEND_MALE, "I would prefer to work with a male participant"),
+    (GEND_FEMALE, "I would prefer to work with a female participant"),
+    (GEND_NONBINARY, "I would prefer to work with a non-binary participant")
+)
+
 GEND_TYPE_FEMALE = "Female"
 GEND_TYPE_MALE = "Male"
 GEND_TYPE_NONBINARY = "Non-Binary"
@@ -150,6 +157,7 @@ class Guide(models.Model):
     groups = models.CharField('Which working groups are you most able to help people with?', max_length=256, default="", blank=True)
     remote = models.CharField('Will you be attending remotely?', max_length=32, choices=YN_CHOICES, default=YNM_NO)
     accept_remote = models.CharField('Are you willing to guide remote participants?',max_length=32, choices=YNM_CHOICES, default=YNM_YES)
+    gender_pref = models.CharField('Participant gender preference', max_length=32, choices=PARTICIPANT_GEND_CHOICES, default=GEND_NOPREF)
     additional_info = models.TextField('Is there anything else we should know?',
                                        blank=True)
     help_frequency = models.CharField("How frequently are you willing to be a guide?", max_length=32, choices=HELP_CHOICES, default=HELP_NO)

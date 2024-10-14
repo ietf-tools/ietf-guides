@@ -11,15 +11,41 @@
   <div class="card-body">
     <div class="card-text">
       <div>
-        <span>Language: {{ participant.language }}</span>
+          <span>Language: 
+              {{ participant.language }}
+          </span>
         <span class="float-right">Attended: {{ participant.pretty_attend }}</span>
       </div>
-      <div>Attending: {{ participant.attending }}</div>
+      <div>Attending:
+          {% if participant.attending != "YES" %}
+          <span class="badge badge-pill badge-warning">
+          {% endif %}
+          {{ participant.attending }}
+          {% if participant.attending != "YES" %}
+          </span>
+          {% endif %}
+      </div>
       <div>Topics: {{ participant.topics }}</div>
       <div>Areas: {% for area in participant.areas.all %}{{ area.short }} {% endfor %}</div>
       <div>Groups: {{ participant.groups }}</div>
-      <div>Guide gender: {{ participant.gender_pref }}</div>
-      <div>Remote: {{ participant.remote }}</div>
+      <div>Guide gender:
+          {% if participant.gender_pref != "NoPref" %}
+          <span class="badge badge-pill badge-warning">
+          {% endif %}
+          {{ participant.gender_pref }}
+          {% if participant.gender_pref != "NoPref" %}
+          </span>
+          {% endif %}
+      </div>
+      <div>Remote:
+          {% if participant.remote == "YES" %}
+          <span class="badge badge-pill badge-warning">
+          {% endif %}
+          {{ participant.remote }}
+          {% if participant.remote == "YES" %}
+          </span>
+          {% endif %}
+      </div>
       <div>Other: {{ participant.additional_info }}</div>
     </div>
   </div>

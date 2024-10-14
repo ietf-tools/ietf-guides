@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name="remote",
             field=models.CharField(
                 choices=[("YES", "Yes"), ("NO", "No")],
-                default="MAYBE",
+                default="NO",
                 max_length=32,
                 verbose_name="Will you be attending remotely?",
             ),

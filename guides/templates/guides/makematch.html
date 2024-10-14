@@ -7,6 +7,10 @@ body, html {
   height:100%;
 }
 
+#left, #right, #topcards {
+  margin-top: 75px;
+}
+
 @media (min-width: 768px){
   #left {
     position: absolute;
@@ -35,7 +39,6 @@ body, html {
   opacity:.7;
 }
 
-
 {% endblock %}
 
 {% block content %}
@@ -50,7 +53,7 @@ body, html {
       <button type="submit" class="btn btn-primary">Match</button>
     </div>
   </div>
-  <div class="row">
+  <div class="row" id="topcards">
     <div class="col-md-6" id="left">
       {% for participant in form.fields.participant.queryset %}
       <input type="radio" name="participant" value="{{ participant.pk }}" />

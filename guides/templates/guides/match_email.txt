@@ -82,6 +82,10 @@ Finally, please let us if there is any other way in which we can
 support your interactions.  Please mail any questions you have to
 lead@guides.ietf.org.
 
+{% if match.participant.remote == "YES" %}NOTE: {{ match.participant.given_name }} will be remote for this IETF.{% endif %}
+
+{% if match.guide.remote == "YES" %}NOTE: {{ match.participant.given_name }} will be remote for this IETF.{% endif %}
+
 Cheers,
 Reese Enghardt, Wes Hardaker, and Paul Wouters
 IETF Guides Program Leads

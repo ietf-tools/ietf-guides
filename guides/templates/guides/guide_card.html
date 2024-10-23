@@ -71,11 +71,19 @@
           </span>
           {% endif %}
       </div>
-      <div>Is Remote: {{ guide.remote }}</div>
+      <div>Is Remote:
+          {% if guide.remote == "YES" %}
+          <span class="badge badge-pill badge-warning">
+          {% endif %}
+          {{ guide.remote }}
+          {% if guide.remote == "YES" %}
+          </span>
+          {% endif %}
+      </div>
       <div>Guide Remotes: {{ guide.accept_remote }}</div>
       <div>Other: {{ guide.additional_info }}</div>
       {% if guide.admin_notes %}
-      <div>Admin notes: {{ guide.admin_notes }}</div>
+      <div><b>Admin notes:</b> {{ guide.admin_notes }}</div>
       {% endif %}
     </div>
   </div>

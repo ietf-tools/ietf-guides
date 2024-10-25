@@ -75,7 +75,8 @@ AREA_INT = "INT"
 AREA_OPS = "OPS"
 AREA_RTG = "RTG"
 AREA_SEC = "SEC"
-AREA_TSG = "TSG"
+AREA_TSV = "TSV"
+AREA_WIT = "WIT"
 AREA_UNKNOWN = "UNKNOWN"
 
 # note: these intentionally sort with NO being last
@@ -95,7 +96,8 @@ IETF_AREAS = (
     (AREA_OPS, "Operations and Management"),
     (AREA_RTG, "Routing"),
     (AREA_SEC, "Security"),
-    (AREA_TSG, "Transport"),
+    (AREA_TSV, "Transport"),
+    (AREA_WIT, "Web and Internet Transport"),
     (AREA_UNKNOWN, "I don't know yet")
 )
 

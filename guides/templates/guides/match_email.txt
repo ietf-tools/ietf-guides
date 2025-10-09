@@ -24,10 +24,15 @@ The IETF guides program aims to have three parts:
 1. (potentially virtual) face to face meeting at the beginning of the meeting
 2. (potentially virtual) check-in during the week.
 
-It would be great if you could meet early in or before the week and
-discuss questions, interests, and 'how-to-get-things-done' in the
-IETF, and perhaps have a follow-up during the week to check-in whether
-there are any questions.
+We try to match guides and new participants as early as we can, but
+doing so depends on a number of factors and we apologize if this match
+was made near the very start of the conference.  If it is early
+enough, it would be great if the two of you could meet virtually
+before the start of the week and/or in person at the very start of the
+week.  Good topics to discuss include participant questions, areas of
+interests, and 'how-to-get-things-done' in the IETF.  If possible,
+have a follow-up meeting later the week to check-in whether there are
+any questions that have come about during the week.
 
 You both have the responsibility to make meetings between you happen,
 but it would be great if the guide would take the lead in setting up
@@ -84,9 +89,9 @@ lead@guides.ietf.org.
 
 {% if match.participant.remote == "YES" %}NOTE: {{ match.participant.given_name }} will be remote for this IETF.{% endif %}
 
-{% if match.guide.remote == "YES" %}NOTE: {{ match.participant.given_name }} will be remote for this IETF.{% endif %}
+{% if match.guide.remote == "YES" %}NOTE: {{ match.guide.given_name }} will be remote for this IETF.{% endif %}
 
 Cheers,
-Reese Enghardt, Wes Hardaker, and Paul Wouters
+Reese Enghardt, Wes Hardaker, Paul Wouters, and Michelle Cotton
 IETF Guides Program Leads
 

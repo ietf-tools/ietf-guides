@@ -16,9 +16,8 @@ RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment && \
 
 RUN apt-get -y install mariadb-client nginx 2>&1
 
-EXPOSE 8002:8002
+EXPOSE 80/tcp
 
-RUN mkdir /code
 WORKDIR /code
 
 # Doing this step before copying the whole codebase improves docker's ability to reuse cached layers at build time

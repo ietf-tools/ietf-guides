@@ -1,7 +1,9 @@
+# Copyright The IETF Trust 2026, All Rights Reserved
 import os
 from email.utils import parseaddr
 from .base import *  # noqa
 # n.b., does _not_ import from .local
+
 
 def _multiline_to_list(s):
     """Helper to split at newlines and convert to list"""
@@ -48,8 +50,47 @@ DATABASES = {
     },
 }
 
-# When running behind CloudFlare, X-Forwarded-Proto=https indicates the incoming connection was
-# secure. Use that to decide whether to use http or https as the scheme when constructing absolute
-# URLs instead of looking at the request.
+# When running behind CloudFlare, X-Forwarded-Proto=https indicates the incoming
+# connection was secure. Use that to decide whether to use http or https as the scheme
+# when constructing absolute URLs instead of looking at the request.
 # https://docs.djangoproject.com/en/5.0/ref/settings/#secure-proxy-ssl-header
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    #
+    "loggers": {
+        "django": {
+            "handlers": ["console", "mail_admins"],
+            "level": "INFO",
+        },
+        "guides": {
+            "handlers": ["console"],
+            "level": "INFO",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "json",
+        },
+        "mail_admins": {
+            "level": "ERROR",
+            "class": "django.utils.log.AdminEmailHandler",
+            "include_html": True,  # non-default
+        },
+    },
+    "formatters": {
+        "json": {
+            "class": "ietf_guides.utils.log.JsonFormatter",
+            "style": "{",
+            "format": (
+                "{asctime}{levelname}{message}{name}{pathname}{lineno}{funcName}"
+                "{process}"
+            ),
+        },
+    },
+}

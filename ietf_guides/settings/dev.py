@@ -1,3 +1,4 @@
+# Copyright The IETF Trust 2026, All Rights Reserved
 from .base import *
 from .local import *
 

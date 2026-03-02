@@ -9,6 +9,7 @@ export DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:-ietf_guides.settings.pro
 /code/manage.py migrate --noinput
 
 cp /code/nginx/default /etc/nginx/sites-enabled/default
+cp /code/nginx/00logging.conf /etc/nginx/conf.d/00logging.conf
 nginx
 
 gunicorn \

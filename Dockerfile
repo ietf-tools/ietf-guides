@@ -26,9 +26,8 @@ RUN pip install -r requirements.txt
 
 COPY . /code/
 
-RUN mkdir /code/logs
-
-RUN mkdir /code/static
+RUN mkdir /code/logs && \
+    mkdir /code/static
 
 ENV DJANGO_SETTINGS_MODULE=ietf_guides.settings.prod
 

@@ -11,6 +11,10 @@ export DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:-ietf_guides.settings.pro
 cp /code/nginx/default /etc/nginx/sites-enabled/default
 nginx
 
-gunicorn ietf_guides.wsgi:application --bind unix:/run/gunicorn.sock
+gunicorn \
+  -c /code/gunicorn.conf.py \
+  --bind unix:/run/gunicorn.sock \
+  ${GUNICORN_EXTRA_ARGS} \
+  ietf_guides.wsgi:application
 
 echo "exited $0"

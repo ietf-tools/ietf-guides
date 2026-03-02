@@ -1,0 +1,58 @@
+# Copyright The IETF Trust 2026, All Rights Reserved
+#
+# Runs guides app, database, and a mailpit. Uses production mode.
+#
+# Known issues:
+#  - At first start, the app service initializes faster than the db service can
+#    start up and create its empty database. The `restart: unless-stopped` on the app
+#    service is a workaround. After a few restarts, the db is ready and app can then
+#    start up properly.
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "8002:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      ADMINS: "admin@example.org"
+      ALLOWED_HOSTS: "*"
+      CSRF_TRUSTED_ORIGINS: "http://localhost:8002"
+      DB_HOST: "db"
+      DB_NAME: "guides"
+      DB_PASS: "abcd1234"
+      DB_PORT: "3306"
+      DB_SSLMODE: "PREFERRED"
+      DB_USER: "guides"
+      DEFAULT_FROM_EMAIL: "lead@guides.example.org"
+      EMAIL_HOST: "mailpit"
+      EMAIL_PORT: "1025"
+      HASHSALT: "wxyz0"
+      SECRET_KEY: "abcdef1234567890abcdef1234567890abcdef1234567890"
+    restart: unless-stopped
+
+  db:
+    image: mariadb:12
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    restart: unless-stopped
+    environment:
+      MARIADB_USER: guides
+      MARIADB_PASSWORD: abcd1234
+      MARIADB_DATABASE: guides
+      MARIADB_ROOT_PASSWORD: dbrootpw
+
+  mailpit:
+    image: axllent/mailpit:v1.27
+    environment:
+      MP_DISABLE_VERSION_CHECK: true
+      MP_LABEL: GuidesMail
+    ports:
+      - "8026:8025"
+
+volumes:
+  mariadb-data:

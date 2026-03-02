@@ -73,5 +73,25 @@ docker run -it -v ${PWD}/logs:/code/logs -v ${PWD}/secrets/local.py:/code/ietf_g
 ```
 The website will then be exposed at http://localhost:8002
 
+### Running with docker-compose
+A docker compose stack is provided for testing. Although not suitable for production, this runs the IETF Guides app in production mode, plus a MariaDB database and a Mailpit instance to receive email. Settings should be adjusted via the `environment` section of the `app` service in `docker-compose.yml`.
+
+To start the application:
+```
+docker compose up --build --detach
+```
+This will bring up the containers. Due to a bug (as of 2026-02-27), on the first startup the `app` service restarts a few times while the `db` service initializes its database. After a few restarts, this should stabilize and the containers will run properly. 
+
+The app will be available on http://localhost:8002. The Mailpit is available on http://localhost:8026.
+To monitor server logs:
+```
+docker compose logs app -f
+```
+Note that the `app` container has its own snapshot of the workspace, it does not mount the dev directory. If you have made changes and want to update the running code, you can do:
+```
+docker compose up --build --detach
+```
+again and it will rebuild and recreate the `app` service.
+
 ### Dummy data
 running `./manage.py make_dummy_data` will create ten guides and ten participants with field values populated by Faker.

@@ -16,9 +16,8 @@ RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment && \
 
 RUN apt-get -y install mariadb-client nginx 2>&1
 
-EXPOSE 8002:8002
+EXPOSE 80/tcp
 
-RUN mkdir /code
 WORKDIR /code
 
 # Doing this step before copying the whole codebase improves docker's ability to reuse cached layers at build time
@@ -27,9 +26,8 @@ RUN pip install -r requirements.txt
 
 COPY . /code/
 
-RUN mkdir /code/logs
-
-RUN mkdir /code/static
+RUN mkdir /code/logs && \
+    mkdir /code/static
 
 ENV DJANGO_SETTINGS_MODULE=ietf_guides.settings.prod
 

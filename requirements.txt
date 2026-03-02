@@ -5,3 +5,4 @@ pyquery>=1.2.13,!=1.2.14
 factory_boy>=2.11,<3
 gunicorn>=20.1.0
 mysqlclient>=2
+python-json-logger>=4.0.0

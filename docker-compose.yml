@@ -13,7 +13,7 @@ services:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - db
+      - pgdb
     ports:
       - "8002:80"
     extra_hosts:
@@ -22,11 +22,10 @@ services:
       ADMINS: "admin@example.org"
       ALLOWED_HOSTS: "*"
       CSRF_TRUSTED_ORIGINS: "http://localhost:8002"
-      DB_HOST: "db"
+      DB_HOST: "pgdb"
       DB_NAME: "guides"
       DB_PASS: "abcd1234"
-      DB_PORT: "3306"
-      DB_SSLMODE: "PREFERRED"
+      DB_PORT: "5432"
       DB_USER: "guides"
       DEFAULT_FROM_EMAIL: "lead@guides.example.org"
       EMAIL_HOST: "mailpit"
@@ -46,6 +45,16 @@ services:
       MARIADB_DATABASE: guides
       MARIADB_ROOT_PASSWORD: dbrootpw
 
+  pgdb:
+    image: postgres:17
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: guides
+      POSTGRES_PASSWORD: abcd1234
+      POSTGRES_DB: guides
+
   mailpit:
     image: axllent/mailpit:v1.27
     environment:
@@ -56,3 +65,4 @@ services:
 
 volumes:
   mariadb-data:
+  postgres-data:

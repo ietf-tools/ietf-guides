@@ -1,5 +1,5 @@
-FROM python:3.9-bullseye
-LABEL maintainer="IETF Tools Team <tools-discuss@ietf.org>"
+FROM python:3.12-trixie
+LABEL maintainer="IETF Tools <tools-discuss@ietf.org>"
 
 # Update system packages
 RUN apt-get update \

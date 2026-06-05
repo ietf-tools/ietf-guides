@@ -1,3 +1,4 @@
+# Copyright The IETF Trust 2019-2023, All Rights Reserved
 from django.urls import include, re_path
 from django.contrib import admin
 

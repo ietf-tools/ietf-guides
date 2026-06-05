@@ -1,3 +1,4 @@
+# Copyright The IETF Trust 2019-2026, All Rights Reserved
 from django.contrib import admin
 
 from .models import Guide, Participant, Language, Match, Area

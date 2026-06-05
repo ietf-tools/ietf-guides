@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
+# Copyright The IETF Trust 2019, All Rights Reserved
 from django.apps import AppConfig
 
 

@@ -1,3 +1,4 @@
+# Copyright The IETF Trust 2019-2024, All Rights Reserved
 from django import forms
 
 from .models import Guide, Participant, Match, YNM_YES

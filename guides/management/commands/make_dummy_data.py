@@ -1,3 +1,4 @@
+# Copyright The IETF Trust 2019, All Rights Reserved
 from django.core.management.base import BaseCommand
 
 from guides.factories import ParticipantFactory, GuideFactory

@@ -1,3 +1,4 @@
+# Copyright The IETF Trust 2019-2026, All Rights Reserved
 from django.db import models
 from django.contrib.auth.models import User
 

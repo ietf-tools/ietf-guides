@@ -1,3 +1,4 @@
+# Copyright The IETF Trust 2019-2026, All Rights Reserved
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

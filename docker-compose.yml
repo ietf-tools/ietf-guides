@@ -3,10 +3,9 @@
 # Runs guides app, database, and a mailpit. Uses production mode.
 #
 # Known issues:
-#  - At first start, the app service initializes faster than the db service can
-#    start up and create its empty database. The `restart: unless-stopped` on the app
-#    service is a workaround. After a few restarts, the db is ready and app can then
-#    start up properly.
+#  - At first start, the app service initializes faster than pgdb can start up and
+#    create its empty database. The `restart: unless-stopped` on the app service is a
+#    workaround. After a few restarts, pgdb is ready and app can then start up properly.
 services:
   app:
     build:
@@ -34,17 +33,6 @@ services:
       SECRET_KEY: "abcdef1234567890abcdef1234567890abcdef1234567890"
     restart: unless-stopped
 
-  db:
-    image: mariadb:12
-    volumes:
-      - mariadb-data:/var/lib/mysql
-    restart: unless-stopped
-    environment:
-      MARIADB_USER: guides
-      MARIADB_PASSWORD: abcd1234
-      MARIADB_DATABASE: guides
-      MARIADB_ROOT_PASSWORD: dbrootpw
-
   pgdb:
     image: postgres:17
     volumes:
@@ -64,5 +52,4 @@ services:
       - "8026:8025"
 
 volumes:
-  mariadb-data:
   postgres-data:

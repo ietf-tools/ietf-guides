@@ -14,7 +14,7 @@ RUN echo "LC_ALL=en_US.UTF-8" >> /etc/environment && \
     locale-gen en_US.UTF-8 && \
     update-locale LC_ALL en_US.UTF-8
 
-RUN apt-get -y install mariadb-client nginx 2>&1
+RUN apt-get -y install postgresql-client nginx 2>&1
 
 EXPOSE 80/tcp
 
@@ -26,8 +26,9 @@ RUN pip install -r requirements.txt
 
 COPY . /code/
 
-RUN mkdir /code/logs && \
-    mkdir /code/static
+# Allow mkdir to succeed if directories already exists
+RUN mkdir -p /code/logs && \
+    mkdir -p /code/static
 
 ENV DJANGO_SETTINGS_MODULE=ietf_guides.settings.prod
 

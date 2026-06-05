@@ -1,3 +1,4 @@
+# Copyright The IETF Trust 2019-2023, All Rights Reserved
 import factory
 import factory.fuzzy
 
@@ -13,7 +14,7 @@ from guides.models import Guide, Participant, Match, Language, Area,\
 
 
 
-class ParticipantFactory(factory.DjangoModelFactory):
+class ParticipantFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Participant
 
@@ -43,7 +44,7 @@ class ParticipantFactory(factory.DjangoModelFactory):
                     self.areas.add(area) 
 
 
-class GuideFactory(factory.DjangoModelFactory):
+class GuideFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Guide
 
@@ -82,24 +83,24 @@ class GuideFactory(factory.DjangoModelFactory):
                     self.areas.add(area)                     
 
 
-class MatchFactory(factory.DjangoModelFactory):
+class MatchFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Match
 
     participant = factory.SubFactory('guides.factories.ParticipantFactory')
     guide = factory.SubFactory('guides.factories.GuideFactory')
 
-class LanguageFactory(factory.DjangoModelFactory):
+class LanguageFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Language
 
     language = factory.Faker('word')
 
-class AreaFactory(factory.DjangoModelFactory):
+class AreaFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Area
 
     area = factory.Faker('word')
 
 
-    short = factory.LazyFunction(lambda: factory.Faker('word').generate()[:12])
+    short = factory.LazyAttribute(lambda o: o.area[:12])

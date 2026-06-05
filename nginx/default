@@ -1,3 +1,7 @@
+upstream guides_backend {
+    server unix:/run/gunicorn.sock;
+}
+
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -33,6 +37,6 @@ server {
         proxy_read_timeout 120;  # nginx default = 60 (Cf = 100)
         proxy_send_timeout 60;  # nginx default = 60 (Cf = 30)
         client_max_body_size 0;  # disable size check
-        proxy_pass http://unix:/run/gunicorn.sock;
+        proxy_pass http://guides_backend/;
     }
 }

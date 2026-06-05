@@ -1,0 +1,52 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+	"name": "IETF Guides",
+	"dockerComposeFile": ["../docker-compose.yml", "docker-compose.devcontainer.yml"],
+	"service": "app",
+	"workspaceFolder": "/code",
+
+	// The production entrypoint is replaced in docker-compose.devcontainer.yml,
+	// so we manage the process ourselves — don't let devcontainer override the command.
+	"overrideCommand": false,
+
+	// Stop all compose services when the devcontainer exits (docker compose stop).
+	// Note: containers are stopped but not removed; use docker compose down manually if needed.
+	"shutdownAction": "stopCompose",
+
+	// Port 80: nginx (serves static files, proxies dynamic requests to manage.py runserver on 8000).
+	// Port 8026: Mailpit UI (mapped from the mailpit service by docker-compose.yml).
+	"forwardPorts": [80, 5432, 8026],
+	"portsAttributes": {
+		"80": {
+			"label": "App (nginx)",
+			"onAutoForward": "notify"
+		},
+		"5432": {
+			"label": "PostgreSQL",
+			"onAutoForward": "silent"
+		},
+		"8026": {
+			"label": "Mailpit UI",
+			"onAutoForward": "notify"
+		},
+		"8000": {
+			"label": "runserver (use port 80/nginx instead)",
+			"onAutoForward": "ignore"
+		}
+	},
+
+	// Reinstall dependencies in case requirements.txt changed since the image was built.
+	"postCreateCommand": "pip install -r requirements.txt",
+
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"python.defaultInterpreterPath": "/usr/local/bin/python"
+			},
+			"extensions": [
+				"ms-python.python",
+				"ms-python.pylint"
+			]
+		}
+	}
+}

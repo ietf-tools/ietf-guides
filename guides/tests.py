@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# Copyright The IETF Trust 2019-2026, All Rights Reserved
+import datetime
 
 from pyquery import PyQuery
 
@@ -8,8 +8,9 @@ from django.urls import reverse
 from django.core import mail
 from django.contrib.auth.models import User
 
+from .templatetags.guides_tags import stalecheck
 from .utils import encode_email
-from .models import Guide, Participant, Match, Language, YEARS_MORETHANTEN, YNM_YES, ATTEND_TWO, ATTEND_THREE, GEND_NOPREF
+from .models import Guide, Participant, Match, Language, YEARS_MORETHANTEN, YNM_YES, YNM_NO, ATTEND_TWO, ATTEND_THREE, GEND_NOPREF
 from .factories import GuideFactory, ParticipantFactory, MatchFactory, LanguageFactory, AreaFactory
 
 class GuidesTests(TestCase):
@@ -75,7 +76,7 @@ class GuidesTests(TestCase):
         url = reverse('guides.views.edit_info', kwargs=dict(hash=hash))
         r = self.client.get(url)
         self.assertEqual(r.status_code,200)
-        r = self.client.post(url, 
+        r = self.client.post(url,
             dict(
                 given_name="Random",
                 surname="Guide",
@@ -87,9 +88,11 @@ class GuidesTests(TestCase):
                 give_intro=YNM_YES,
                 areas=[2,5],
                 groups='blarg, burgle, baz',
+                remote=YNM_NO,
                 help_frequency="ONE",
-                accept_remote="NO",
-                additional_info="Nope.",               
+                accept_remote=YNM_YES,
+                gender_pref=GEND_NOPREF,
+                additional_info="Nope.",
             )
         )
         self.assertEqual(r.status_code,200)
@@ -101,9 +104,9 @@ class GuidesTests(TestCase):
         url = reverse('guides.views.edit_info', kwargs=dict(hash=hash))
         r = self.client.get(url)
         self.assertEqual(r.status_code,200)
-        r = self.client.post(url, 
+        r = self.client.post(url,
             dict(
-                attending="YES",
+                attending=YNM_YES,
                 given_name="Random",
                 surname="Participant",
                 affiliation="DoNotHave",
@@ -114,7 +117,7 @@ class GuidesTests(TestCase):
                 areas=[1,3],
                 groups='anything+contining+"bis"',
                 gender_pref=GEND_NOPREF,
-                remote="YES",
+                remote=YNM_YES,
                 additional_info="peace",
             )
         )
@@ -122,6 +125,38 @@ class GuidesTests(TestCase):
         q = PyQuery(r.content)
         self.assertFalse(q('form>.has-error')) 
         self.assertEqual(Participant.objects.count(),1)
+
+    def test_participant_non_latin_name(self):
+        url = reverse('guides.views.request_guide', kwargs=dict())
+        r = self.client.post(url, dict(email='zhangsan@example.com'))
+        self.assertEqual(r.status_code, 200)
+        q = PyQuery(r.content)
+        self.assertFalse(q('form>.has-error'))
+
+        hash = encode_email('zhangsan@example.com', 'participant')
+        url = reverse('guides.views.edit_info', kwargs=dict(hash=hash))
+        r = self.client.post(url,
+            dict(
+                attending=YNM_YES,
+                given_name="张三",
+                surname="张",
+                affiliation="示例单位",
+                country="China",
+                language="1",
+                attend=ATTEND_TWO,
+                topics="routing protocols",
+                areas=[1, 3],
+                groups='rtgwg',
+                gender_pref=GEND_NOPREF,
+                remote=YNM_NO,
+                additional_info="",
+            )
+        )
+        self.assertEqual(r.status_code, 200)
+        q = PyQuery(r.content)
+        self.assertFalse(q('form>.has-error'))
+        participant = Participant.objects.get(email='zhangsan@example.com')
+        self.assertEqual(participant.given_name, '张三')
 
     def test_make_match(self):
         guide = GuideFactory()
@@ -164,3 +199,32 @@ class GuidesTests(TestCase):
         self.assertEqual(r.status_code, 302)
         self.assertEqual(len(mail.outbox),0)
         self.assertFalse(Match.objects.filter(pk=match.pk).exists())
+
+
+class StalecheckTagTests(TestCase):
+
+    def _date(self, days_ago):
+        return (datetime.datetime.now() - datetime.timedelta(days=days_ago)).strftime("%Y/%m/%d")
+
+    def test_recent_slash_format(self):
+        self.assertEqual(stalecheck(self._date(10)), "")
+
+    def test_stale_slash_format(self):
+        result = stalecheck(self._date(90))
+        self.assertIn('stale', result)
+        self.assertIn('alert-warning', result)
+
+    def test_recent_dash_format(self):
+        date = (datetime.datetime.now() - datetime.timedelta(days=10)).strftime("%Y-%m-%d")
+        self.assertEqual(stalecheck(date), "")
+
+    def test_stale_dash_format(self):
+        date = (datetime.datetime.now() - datetime.timedelta(days=90)).strftime("%Y-%m-%d")
+        result = stalecheck(date)
+        self.assertIn('stale', result)
+        self.assertIn('alert-warning', result)
+
+    def test_unparsable(self):
+        result = stalecheck("not-a-date")
+        self.assertIn('unparsable', result)
+        self.assertIn('alert-danger', result)

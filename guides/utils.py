@@ -1,3 +1,4 @@
+# Copyright The IETF Trust 2019, All Rights Reserved
 from django.conf import settings
 from hashids import Hashids
 

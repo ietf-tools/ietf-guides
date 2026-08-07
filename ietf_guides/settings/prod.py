@@ -40,13 +40,9 @@ DATABASES = {
         "NAME": os.environ["DB_NAME"],
         "HOST": os.environ["DB_HOST"],
         "PORT": os.environ["DB_PORT"],
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": "django.db.backends.postgresql",
         "USER": os.environ["DB_USER"],
         "PASSWORD": os.environ["DB_PASS"],
-        "OPTIONS": {
-            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
-            "ssl_mode": os.environ.get("DB_SSLMODE", "PREFERRED"),
-        },
     },
 }
 

@@ -3,17 +3,16 @@
 # Runs guides app, database, and a mailpit. Uses production mode.
 #
 # Known issues:
-#  - At first start, the app service initializes faster than the db service can
-#    start up and create its empty database. The `restart: unless-stopped` on the app
-#    service is a workaround. After a few restarts, the db is ready and app can then
-#    start up properly.
+#  - At first start, the app service initializes faster than pgdb can start up and
+#    create its empty database. The `restart: unless-stopped` on the app service is a
+#    workaround. After a few restarts, pgdb is ready and app can then start up properly.
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - db
+      - pgdb
     ports:
       - "8002:80"
     extra_hosts:
@@ -22,11 +21,10 @@ services:
       ADMINS: "admin@example.org"
       ALLOWED_HOSTS: "*"
       CSRF_TRUSTED_ORIGINS: "http://localhost:8002"
-      DB_HOST: "db"
+      DB_HOST: "pgdb"
       DB_NAME: "guides"
       DB_PASS: "abcd1234"
-      DB_PORT: "3306"
-      DB_SSLMODE: "PREFERRED"
+      DB_PORT: "5432"
       DB_USER: "guides"
       DEFAULT_FROM_EMAIL: "lead@guides.example.org"
       EMAIL_HOST: "mailpit"
@@ -35,16 +33,15 @@ services:
       SECRET_KEY: "abcdef1234567890abcdef1234567890abcdef1234567890"
     restart: unless-stopped
 
-  db:
-    image: mariadb:12
+  pgdb:
+    image: postgres:17
     volumes:
-      - mariadb-data:/var/lib/mysql
+      - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
     environment:
-      MARIADB_USER: guides
-      MARIADB_PASSWORD: abcd1234
-      MARIADB_DATABASE: guides
-      MARIADB_ROOT_PASSWORD: dbrootpw
+      POSTGRES_USER: guides
+      POSTGRES_PASSWORD: abcd1234
+      POSTGRES_DB: guides
 
   mailpit:
     image: axllent/mailpit:v1.27
@@ -55,4 +52,4 @@ services:
       - "8026:8025"
 
 volumes:
-  mariadb-data:
+  postgres-data:

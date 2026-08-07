@@ -1,5 +1,6 @@
-upstream guides_backend {
+upstream django {
     server unix:/run/gunicorn.sock;
+    keepalive 0;
 }
 
 server {
@@ -37,6 +38,6 @@ server {
         proxy_read_timeout 120;  # nginx default = 60 (Cf = 100)
         proxy_send_timeout 60;  # nginx default = 60 (Cf = 30)
         client_max_body_size 0;  # disable size check
-        proxy_pass http://guides_backend/;
+        proxy_pass http://django;
     }
 }

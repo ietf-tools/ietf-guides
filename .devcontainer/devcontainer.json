@@ -5,6 +5,14 @@
 	"service": "app",
 	"workspaceFolder": "/code",
 
+	// The image runs as the unprivileged "guides" user. Keep its uid as built:
+	// /opt/venv and /run/guides are owned by uid 1000 in the image, and letting
+	// VS Code remap the uid would leave them unwritable. On a Linux host whose
+	// uid is not 1000, rebuild with APP_UID/APP_GID set to match (see
+	// docker-compose.yml) so the bind-mounted workspace stays writable.
+	"remoteUser": "guides",
+	"updateRemoteUserUID": false,
+
 	// The production entrypoint is replaced in docker-compose.devcontainer.yml,
 	// so we manage the process ourselves — don't let devcontainer override the command.
 	"overrideCommand": false,
@@ -13,11 +21,11 @@
 	// Note: containers are stopped but not removed; use docker compose down manually if needed.
 	"shutdownAction": "stopCompose",
 
-	// Port 80: nginx (serves static files, proxies dynamic requests to manage.py runserver on 8000).
+	// Port 8080: nginx (serves static files, proxies dynamic requests to manage.py runserver on 8000).
 	// Port 8026: Mailpit UI (mapped from the mailpit service by docker-compose.yml).
-	"forwardPorts": [80, 5432, 8026],
+	"forwardPorts": [8080, 5432, 8026],
 	"portsAttributes": {
-		"80": {
+		"8080": {
 			"label": "App (nginx)",
 			"onAutoForward": "notify"
 		},
@@ -30,7 +38,7 @@
 			"onAutoForward": "notify"
 		},
 		"8000": {
-			"label": "runserver (use port 80/nginx instead)",
+			"label": "runserver (use port 8080/nginx instead)",
 			"onAutoForward": "ignore"
 		}
 	},
@@ -41,7 +49,7 @@
 	"customizations": {
 		"vscode": {
 			"settings": {
-				"python.defaultInterpreterPath": "/usr/local/bin/python"
+				"python.defaultInterpreterPath": "/opt/venv/bin/python"
 			},
 			"extensions": [
 				"ms-python.python",

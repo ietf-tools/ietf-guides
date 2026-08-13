@@ -1,10 +1,11 @@
 upstream django {
-    server unix:/run/gunicorn.sock;
+    server unix:/run/guides/gunicorn.sock;
 }
 
 server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+    # High port: nginx runs unprivileged and cannot bind 80
+    listen 8080 default_server;
+    listen [::]:8080 default_server;
     server_name _;
 
     error_log stderr crit;  # log to stderr (format not adjustable, so not JSON)
@@ -20,8 +21,10 @@ server {
     }
 
     location /static/ {
-        # Replace default "main" formatter with the ietfjson formatter from nginx-logging.conf
-        access_log  /dev/stdout ietfjson;
+        # Replace default "main" formatter with the ietfjson formatter from nginx-logging.conf.
+        # This is a FIFO the entrypoint relays to stdout: nginx runs unprivileged
+        # and so cannot reopen /dev/stdout, which belongs to root.
+        access_log  /run/guides/access.log ietfjson;
 
         root /code;
     }

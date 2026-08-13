@@ -11,10 +11,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      # The container runs as an unprivileged user with this uid/gid. On a Linux
+      # host, set APP_UID/APP_GID to your own id -u/id -g so that bind-mounted
+      # directories stay writable.
+      args:
+        APP_UID: ${APP_UID:-1000}
+        APP_GID: ${APP_GID:-1000}
     depends_on:
       - pgdb
     ports:
-      - "8002:80"
+      - "8002:8080"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:

@@ -1,6 +1,5 @@
 upstream guides_backend {
     server localhost:8000;
-#    keepalive 0;
 }
 
 server {

@@ -1,6 +1,5 @@
 upstream django {
     server unix:/run/gunicorn.sock;
-    keepalive 0;
 }
 
 server {

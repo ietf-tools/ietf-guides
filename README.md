@@ -59,17 +59,21 @@ DATABASES = {
 * `./manage.py createsuperuser`
 
 ### Running a prebuilt image under docker
+The container runs as the unprivileged user `guides` (uid/gid 1000), so nginx
+listens on 8080 rather than 80. Map a host port to 8080 as shown below. Any host
+directory you mount (such as `logs`) must be writable by uid 1000.
+
 * set up a database and a user that has all privileges with it
 * create a run directory outside any clone of the source
 * create a `local.py` in that directory as above
 * start the most recent image from <https://cloud.docker.com/u/ietf/repository/docker/ietf/ietf_guides> mapping your `local.py` and possibly your database socket into the container using a command similar to:
 ```bash
-docker run -it -v ${PWD}/logs:/code/logs -v ${PWD}/local.py:/code/ietf_guides/settings/local.py -p 8002:80 --name ietf-guides ghcr.io/ietf-tools/ietf-guides:latest
+docker run -it -v ${PWD}/logs:/code/logs -v ${PWD}/local.py:/code/ietf_guides/settings/local.py -p 8002:8080 --name ietf-guides ghcr.io/ietf-tools/ietf-guides:latest
 ```
 or perhaps
 
 ```bash
-docker run -it -v ${PWD}/logs:/code/logs -v ${PWD}/secrets/local.py:/code/ietf_guides/settings/local.py -v /var/run/mysql:/var/run/mysql -p 8002:80 --name ietf-guides ghcr.io/ietf-tools/ietf-guides:latest
+docker run -it -v ${PWD}/logs:/code/logs -v ${PWD}/secrets/local.py:/code/ietf_guides/settings/local.py -v /var/run/mysql:/var/run/mysql -p 8002:8080 --name ietf-guides ghcr.io/ietf-tools/ietf-guides:latest
 ```
 The website will then be exposed at http://localhost:8002
 

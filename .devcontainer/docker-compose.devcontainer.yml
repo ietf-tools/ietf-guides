@@ -1,6 +1,7 @@
 # Devcontainer overrides: runs collectstatic + nginx (for static file serving),
 # then keeps the container alive. The developer starts the Django dev server manually.
-# nginx proxies dynamic requests to localhost:8000 (manage.py runserver default).
+# nginx listens on 8080 and proxies dynamic requests to localhost:8000 (manage.py
+# runserver default). The cat relays nginx's access log FIFO to stdout.
 services:
   app:
     entrypoint: ["/bin/bash", "-c",
@@ -9,6 +10,7 @@ services:
        /code/manage.py migrate --noinput &&
        cp /code/nginx/devcontainer /etc/nginx/sites-enabled/default &&
        cp /code/nginx/00logging.conf /etc/nginx/conf.d/00logging.conf &&
+       { cat <>/run/guides/access.log & } &&
        nginx &&
        sleep infinity"]
     volumes:
